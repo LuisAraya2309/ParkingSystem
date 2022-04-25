@@ -1,12 +1,15 @@
-import React, { Fragment } from 'react';
+import React, { Fragment} from 'react';
 import {useForm} from 'react-hook-form';
+import {useNavigate} from "react-router-dom"
 import axios from 'axios';
 export  function LoginForm() {
     const {register,handleSubmit} = useForm();
-    /*
-{loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />}
-
-    */
+    
+    let navigate = useNavigate()
+    const loggedIn = () =>{
+        let adminPath = '/AdminPage'
+        navigate(adminPath)
+    }
 
 
     const onSubmit = async(data) =>{
@@ -14,6 +17,7 @@ export  function LoginForm() {
             const response = await axios.post('http://localhost:3001/users/login', data);
             const userLogged = response.data.email
             console.log('Bienvenido ' + userLogged)
+            loggedIn()
             
         } catch(err){
             alert('Usuario invalido')
