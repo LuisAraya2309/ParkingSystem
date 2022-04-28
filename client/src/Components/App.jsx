@@ -9,6 +9,9 @@ import {
   } from "react-router-dom";
 import { AdminPage } from './AdminPage/AdminPage';
 import { SignUp } from './SignUpPage/SignUp';
+import {QueriesPage} from './QueriesModule/QueriesPage'
+import { HomePage } from './UserHome/HomePage';
+import { UserInformation } from './UserInformation/UserInformation';
 
 
 export function App() {
@@ -21,6 +24,13 @@ export function App() {
                   <Route exact path="/AdminPage" element={<AdminPage />}/>
 
                   <Route exact path="/SignUpPage" element={<SignUp />}/>
+
+                  <Route exact path="/QueriesPage" element={<QueriesPage />}/>
+
+                  <Route exact path="/HomePage" element={<HomePage />}/>
+
+                  <Route exact path="/UserInformation" element={<UserInformation />}/>
+                  
 
               </Routes>
                 

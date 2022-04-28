@@ -6,6 +6,13 @@ export function DepartmentsList() {
 
   const [departmentsList,setDepartmentsList] = useState([]);
 
+
+  
+  /*
+  const departmentsList = useState([])[0]
+  const setDepartmentList = useState([])[1]
+  */
+
   useEffect(() => {
     axios.get('http://localhost:3001/departments/getDepartments').then((response) => {
       setDepartmentsList(response.data)

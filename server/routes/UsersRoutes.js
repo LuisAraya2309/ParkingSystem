@@ -18,6 +18,23 @@ router.get("/getUsers",(req,res) => {
     })
 })
 
+router.post("/getUserByEmail", async (req,res) => {
+    UserModel.aggregate([{$match:{email:{$eq:req.body.username}}}], (err,result) =>{
+        if (err){
+            res.status(404).send('User invalid')
+        }
+        if(result[0] === undefined){
+            res.status(404).send('User invalid')
+        }
+        else{
+            console.log('funciona')
+            res.json(result[0])
+        }
+    })
+    
+    
+})
+
 
 router.post("/createUser", async (req,res) => {
     const user = req.body;
@@ -34,7 +51,7 @@ router.post("/login", async (req,res) => {
         "email":req.body.email,
         "password":req.body.password
     }
-
+    
     UserModel.aggregate([{$match:{email:{$eq:user.email}}},{$match:{password:{$eq:user.password}}}], (err,result) =>{
         if (err){
             res.status(404).send('User invalid')

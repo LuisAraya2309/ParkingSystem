@@ -37,7 +37,7 @@ export  function LoginForm() {
 
                 <div className="mb-3">
                     <label htmlFor="password" className="form-label">Contraseña</label>
-                    <input type="text" className="form-control" id="password" placeholder="Su contraseña"
+                    <input type="password" className="form-control" id="password" placeholder="Su contraseña"
                     {...register('password',{required:true})}
                     />
                 </div>
