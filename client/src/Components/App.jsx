@@ -12,6 +12,8 @@ import { SignUp } from './SignUpPage/SignUp';
 import {QueriesPage} from './QueriesModule/QueriesPage'
 import { HomePage } from './UserHome/HomePage';
 import { UserInformation } from './UserInformation/UserInformation';
+import { ManageParkingPage } from './ManageParking/ManageParkingPage';
+import { ManageUsersPage } from './ManageUsers/ManageUsersPage';
 import { ClientPage } from './ClientPage/ClientPage';
 import { ModifySchedule } from './ClientSchedule/ModifySchedule';
 
@@ -32,6 +34,10 @@ export function App() {
                   <Route exact path="/HomePage" element={<HomePage />}/>
 
                   <Route exact path="/UserInformation" element={<UserInformation />}/>
+
+                  <Route exact path="/ManageUsers" element={<ManageUsersPage />}/>
+
+                  <Route exact path="/ManageParking" element={<ManageParkingPage />}/>
                   
                   <Route exact path="/ClientPage" element={<ClientPage />}/>
 

@@ -18,6 +18,7 @@ router.get("/getUsers",(req,res) => {
     })
 })
 
+
 router.post("/getUserByEmail", async (req,res) => {
     UserModel.aggregate([{$match:{email:{$eq:req.body.username}}}], (err,result) =>{
         if (err){
@@ -63,8 +64,51 @@ router.post("/login", async (req,res) => {
             res.json(user)
         }
     })
+})
+
+router.post("/createCompleteUser", async (req,res) => {
+    const user = req.body;
+    const newUser = new CompleteUserModel(user);
+    await newUser.save();
+
+    res.json(user)
+})
+
+router.post("/deleteById", async (req,res) => {
     
+    const idUser = {"identification":req.body.id}
     
+    CompleteUserModel.remove({"id":idUser.identification}, (err,result) =>{
+        if (err){
+            res.status(404).send('User not found')
+        }
+        if(result[0] === undefined){
+            res.status(404).send('User not found')
+        }
+        else{
+            res.json(idUser)
+        }
+    })
+})
+
+router.post("/updateById", async (req,res) => {
+    
+    const user = {
+        "identification":req.body.id,
+        "newAttribute":req.dody.newAttribute
+    }
+    
+    CompleteUserModel.update({identification:user.identification},{$set: {newAttribute: user.newAttribute}},(err,result) =>{
+        if (err){
+            res.status(404).send('User not found')
+        }
+        if(result[0] === undefined){
+            res.status(404).send('User not found')
+        }
+        else{
+            res.json(user)
+        }
+    })
 })
 
 module.exports = router;
