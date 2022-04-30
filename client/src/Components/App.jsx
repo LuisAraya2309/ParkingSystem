@@ -12,12 +12,14 @@ import { SignUp } from './SignUpPage/SignUp';
 import {QueriesPage} from './QueriesModule/QueriesPage'
 import { HomePage } from './UserHome/HomePage';
 import { UserInformation } from './UserInformation/UserInformation';
-
+import { ClientPage } from './ClientPage/ClientPage';
+import { ModifySchedule } from './ClientSchedule/ModifySchedule';
 
 export function App() {
   return (
       <Router>
           <div className="App" >
+            
               <Routes>
                   <Route exact path="/" element={<LoginPage />}/>
 
@@ -31,6 +33,9 @@ export function App() {
 
                   <Route exact path="/UserInformation" element={<UserInformation />}/>
                   
+                  <Route exact path="/ClientPage" element={<ClientPage />}/>
+
+                  <Route exact path="/ClientSchedule" element={<ModifySchedule />}/>
 
               </Routes>
                 
