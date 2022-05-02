@@ -12,7 +12,7 @@ export function AdminPage() {
                     <br/>
                     <div className="row row-cols-1 row-cols-md-3 g-4">
                         
-                        <PrincipalCard props={{title:"Administracion del Parqueo",buttonTitle:"Administrar Parqueo",redirectLink:"/"}} />
+                        <PrincipalCard props={{title:"Administracion del Parqueo",buttonTitle:"Administrar Parqueo",redirectLink:"/ManageParking"}} />
 
                         <PrincipalCard props={{title:"Administracion de Usuarios",buttonTitle:"Administrar Usuarios",redirectLink:"/ManageUsers"}} />
 

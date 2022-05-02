@@ -1,7 +1,17 @@
 import React,{Fragment} from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
+import { PrincipalCardSelect } from '../GeneralResources/PrincipalCardSelect'
 import { PrincipalCard } from '../GeneralResources/PrincipalCard'
+
 export function ManageUsersPage() {
+
+    /*
+    let navigate = useNavigate()
+    const eliminated = () =>{
+        let adminPath = '/ManageUsers'
+        navigate(adminPath)
+    }*/
+
   return (
     <Fragment>
         <header className="App-header">
@@ -12,11 +22,11 @@ export function ManageUsersPage() {
                     <br/>
                     <div className="row row-cols-1 row-cols-md-3 g-4">
                         
-                        <PrincipalCard props={{title:"Administracion del Parqueo",buttonTitle:"Administrar Parqueo",redirectLink:"/ManageUsers"}} />
+                        <PrincipalCard props={{title:"Registrar un usuario",buttonTitle:"Registrar un usuario",redirectLink:"/SignUpPage"}} />
 
-                        <PrincipalCard props={{title:"Administracion de Usuarios",buttonTitle:"Administrar Usuarios",redirectLink:"/ManageUsers"}} />
-
-                        <PrincipalCard props={{title:"Módulo de Consultas",buttonTitle:"Realizar Consultas",redirectLink:"/ManageUsers"}} />
+                        <PrincipalCardSelect props={{title:"Eliminar usuario",buttonTitle:"Eliminar usuario",redirectLink:"/ManageUsers"}} />
+                    
+                        <PrincipalCard props={{title:"Modificar información de usuario",buttonTitle:"Realizar Consultas",redirectLink:"/ManageUsers"}} />
 
                     </div>
                     

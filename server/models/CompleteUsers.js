@@ -2,7 +2,7 @@ const { default: mongoose } = require("mongoose");
 
 const CompleteUserSchema = new mongoose.Schema({
     
-    id:{
+    ID:{
         type:Number,
         required:true,
     },
