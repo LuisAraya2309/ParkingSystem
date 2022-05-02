@@ -18,7 +18,7 @@ const ParkingSchema = new mongoose.Schema({
     },
 
     schedule:{
-        type:JSON,//cambiar
+        type:Object,
         required:true,
     },
 
@@ -33,5 +33,5 @@ const ParkingSchema = new mongoose.Schema({
     },
 });
 
-const ParkingModel = mongoose.model("parking",ParkingSchema)
+const ParkingModel = mongoose.model("parkings",ParkingSchema)
 module.exports = ParkingModel

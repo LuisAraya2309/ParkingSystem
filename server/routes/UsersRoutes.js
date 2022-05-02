@@ -74,11 +74,11 @@ router.post("/createCompleteUser", async (req,res) => {
     res.json(user)
 })
 
-router.post("/deleteByName", async (req,res) => {
+router.post("/deleteById", async (req,res) => {
     
-    const idUser = {"name":req.body.name}
+    const idUser = {"ID":req.body.ID}
     
-    CompleteUserModel.remove({"name":idUser.name}, (err,result) =>{
+    CompleteUserModel.remove({"ID":idUser.ID}, (err,result) =>{
         if (err){
             res.status(404).send('User not found')
         }

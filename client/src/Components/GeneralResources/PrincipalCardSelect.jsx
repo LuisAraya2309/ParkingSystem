@@ -11,7 +11,7 @@ export function PrincipalCardSelect({props}) {
             setUsersList(response.data)
         })
       },[]);
-    
+
     return (
         <Fragment>
             <div className="col">
@@ -23,7 +23,7 @@ export function PrincipalCardSelect({props}) {
                         <option value="DEFAULT" disabled>Usuarios</option>
                         {userList.map((user) =>{
                             return (
-                            <option key={user.ID} value={user.id}> {user.name + ' '+ user.lastname1 + ' '+ user.lastname2}</option>
+                            <option key={user.ID} value={user.id}> {user.ID/*name + ' '+ user.lastname1 + ' '+ user.lastname2*/}</option>
                             
                             );
                         })}

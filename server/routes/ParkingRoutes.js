@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const UserModel = require('../models/Parking') 
+const ParkingModel = require('../models/Parking')
 
 router.post("/",async(req,res)=>{
 
@@ -7,7 +7,7 @@ router.post("/",async(req,res)=>{
 
 router.post("/createParking", async (req,res) => {
     const parking = req.body;
-    const newParking = new CompleteUserModel(parking);
+    const newParking = new CompleteParkingModel(parking);
     await newParking.save();
 
     res.json(parking)
@@ -15,9 +15,9 @@ router.post("/createParking", async (req,res) => {
 
 router.post("/deleteByName", async (req,res) => {
     
-    const parkingName = "name":req.body.name
+    const parkingName = {"name":req.body.name}
     
-    ParkingModel.remove({"name",parkingName.name}, (err,result) =>{
+    ParkingModel.remove({"name":parkingName.name}, (err,result) =>{
         if (err){
             res.status(404).send('User not found')
         }

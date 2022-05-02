@@ -2,8 +2,10 @@ import React,{Fragment} from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
 import { PrincipalCardSelect } from '../GeneralResources/PrincipalCardSelect'
 import { PrincipalCard } from '../GeneralResources/PrincipalCard'
+import { MangParkingForm } from './MangParkingForm'
 
 export function ManageParkingPage() {
+
   return (
     <Fragment>
         <header className="App-header">
@@ -20,7 +22,7 @@ export function ManageParkingPage() {
 
                         <PrincipalCard props={{title:"Modificar información de un parqueo",buttonTitle:"Actualizar",redirectLink:"/"}} />
 
-                        <PrincipalCardSelect props={{title:"Eliminar un parqueo",buttonTitle:"Eliminar",redirectLink:"/ManageParking"}} />
+                        <MangParkingForm props={{title:"Eliminar un parqueo",buttonTitle:"Eliminar"}} />
 
                     </div>
                     
