@@ -17,6 +17,9 @@ import { ManageUsersPage } from './ManageUsers/ManageUsersPage';
 import { ClientPage } from './ClientPage/ClientPage';
 import { ModifySchedule } from './ClientSchedule/ModifySchedule';
 import { CustumerInquieries } from './CustumerInquieries/CustumerInquieries';
+import { LocationParking } from './LocationParking/LocationParking';
+import { ScheduleParking } from './ScheduleParking/ScheduleParking';
+
 
 export function App() {
   return (
@@ -46,7 +49,9 @@ export function App() {
 
                   <Route exact path="/CustumerInquieries" element={<CustumerInquieries />}/>
 
-                  <Route exact path="/ScheduleCustumer" element={<ScheduleCustumer />}/>
+                  <Route exact path="/LocationParking" element={<LocationParking />}/>
+
+                  <Route exact path="/ScheduleParking" element={<ScheduleParking />}/>
 
               </Routes>
                 

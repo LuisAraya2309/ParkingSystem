@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const UserModel = require('../models/Parking')
+const UserModel = require('../models/Parking') 
 
 router.post("/",async(req,res)=>{
 
@@ -60,4 +60,34 @@ router.get("/getParking",(req,res) => {
     })
 })
 
+router.post("/getParkingByLocation", async (req,res) => {
+    ParkingModel.aggregate([{$match:{location:{$eq:req.body.location}}}], (err,result) =>{
+        if (err){
+            res.status(404).send('Parking invalid')
+        }
+        if(result[0] === undefined){
+            res.status(404).send('Parking invalid')
+        }
+        else{
+            console.log('funciona')
+            res.json(result[0])
+        }
+    })
+})
+/*
+router.post("/getParkingBySchedule", async (req,res) => {
+    ParkingModel.aggregate([{$match:{location:{$eq:req.body.Schedule.????}}}], (err,result) =>{
+        if (err){
+            res.status(404).send('Parking invalid 1')
+        }
+        if(result[0] === undefined){
+            res.status(404).send('Parking invalid')
+        }
+        else{
+            console.log('funciona')
+            res.json(result[0])
+        }
+    })
+})
+*///missing final schedule model
 module.exports = router;

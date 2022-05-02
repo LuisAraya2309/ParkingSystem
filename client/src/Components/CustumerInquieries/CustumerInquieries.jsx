@@ -14,9 +14,9 @@ export function CustumerInquieries() {
 
                           <PrincipalCard props={{title:"Consultar por reserva",buttonTitle:"Realizar Consulta",redirectLink:"/"}} />
                           
-                          <PrincipalCard props={{title:"Consultar por direccion",buttonTitle:"Realizar Consulta",redirectLink:"/ScheduleCustumer"}} />
+                          <PrincipalCard props={{title:"Consultar por direccion",buttonTitle:"Realizar Consulta",redirectLink:"/LocationParking"}} />
   
-                          <PrincipalCard props={{title:"Consultar por horario",buttonTitle:"Realizar Consulta",redirectLink:"/"}} />
+                          <PrincipalCard props={{title:"Consultar por horario",buttonTitle:"Realizar Consulta",redirectLink:"/ScheduleParking"}} />
    
                       </div>
                   </div>

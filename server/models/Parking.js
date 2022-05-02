@@ -18,7 +18,7 @@ const ParkingSchema = new mongoose.Schema({
     },
 
     schedule:{
-        type:json,
+        type:JSON,//cambiar
         required:true,
     },
 

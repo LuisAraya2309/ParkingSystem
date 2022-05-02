@@ -2,8 +2,8 @@ import React, { Fragment, useState } from 'react';
 import userLogo from '../../images/userLogo.png'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { ParkingInformation } from './ParkingInformation';
-export function ScheduleCustumer() {
+import { ParkingInformation } from './';
+export function ReportFuncioanry() {
   
   const layoutInfo = {name:'',type:'',schedule:'',location:'',slotsAvaible:''}
   const [username,setUsername] = useState('Usuario')
