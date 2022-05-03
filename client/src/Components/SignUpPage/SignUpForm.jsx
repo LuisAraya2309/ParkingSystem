@@ -1,11 +1,14 @@
 import React,{Fragment} from 'react'
 import {useForm} from 'react-hook-form';
-import { DepartmentsList } from '../GeneralResources/DepartmentsList';
+import { useState } from 'react';
+import { useEffect } from 'react';
+//import { DepartmentsList } from '../GeneralResources/DepartmentsList';
 
-//import axios from 'axios';
+import axios from 'axios';
 
 export function SignUpForm() {
     const {register,handleSubmit} = useForm();
+    const [departmentsList,setDepartmentsList] = useState([]);
 
 
     const onSubmit = async(data) =>{
@@ -14,20 +17,13 @@ export function SignUpForm() {
         }catch(err){
                 alert('Usuario invalido')
         }
-        
-        /*
-        try{
-            const response = await axios.post('http://localhost:3001/createUser', data);
-            const userLogged = response.data.email
-            console.log('Bienvenido ' + userLogged)
-            
-        } catch(err){
-            alert('Usuario invalido')
-        }
-        */
-        
-    
     }
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/departments/getDepartments').then((response) => {
+          setDepartmentsList(response.data)
+        })
+      },[]);
 
 
   return (
@@ -66,7 +62,18 @@ export function SignUpForm() {
                     <input type="email" className="form-control" placeholder="Correo alterno" aria-label="Correo alterno" {...register('altEmail',{required:true})}/>
                 </div>
                 <div className="col">
-                <DepartmentsList />
+
+
+                <select className="form-select" defaultValue={'DEFAULT'} aria-label="Departamento" {...register('department',{required:true})}>
+                    <option value="DEFAULT" disabled>Departamento</option>
+                    {departmentsList.map((department) =>{
+                    return (
+                        <option key={department.code} value={department.code}>{department.code + '-'+ department.name}</option>
+                    );
+                    })}
+                </select>
+                
+                
                 </div>
                 <div className="col">
                     <input type="text" className="form-control" placeholder="Teléfono" aria-label="Teléfono" {...register('phone',{required:true})}/>

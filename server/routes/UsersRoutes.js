@@ -47,7 +47,8 @@ router.post("/login", async (req,res) => {
     
     const user = {
         "email":req.body.email,
-        "password":req.body.password
+        "password":req.body.password,
+        "type":""
     }
     
     UserModel.aggregate([{$match:{email:{$eq:user.email}}},{$match:{password:{$eq:user.password}}}], (err,result) =>{
@@ -58,6 +59,7 @@ router.post("/login", async (req,res) => {
             res.status(404).send('User invalid')
         }
         else{
+            user.type = result[0].type
             res.json(user)
         }
     })
@@ -107,5 +109,47 @@ router.post("/updateById", async (req,res) => {
         }
     })
 })
+
+router.post("/modifySchedule", async (req,res)=>{
+
+    const user = {
+        "email" : req.body[1]
+    }
+
+    const newSchedule = {
+        "schedule" : req.body[0].schedule,
+        "days" : req.body[0].days,
+        "email" : req.body[1] //req.body[1]
+    }
+
+    UserModel.findOne({user},(err,result)=>{
+        let foundUser ={}
+        foundUser = result
+        let oldSchedule = result.schedule
+        let newDays = newSchedule.days
+        let oldDays = Object.keys(oldSchedule)
+        newDays.forEach(function(day){
+           if(oldDays.includes(day)){
+               oldSchedule[day].push(newSchedule.schedule)
+           }
+           else{
+            oldSchedule[day] = [newSchedule.schedule]
+           } 
+        })
+        //console.log(oldSchedule)
+
+        UserModel.findOneAndUpdate({email:user.email},{schedule:oldSchedule},{new:true},(error,data)=>{
+            if(error){
+                res.status(404).send('Horario inválido')
+
+            }else{
+                res.json(data)
+            }
+        })
+        
+    })
+   
+});
+
 
 module.exports = router;

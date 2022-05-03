@@ -6,9 +6,10 @@ export  function LoginForm() {
     const {register,handleSubmit} = useForm();
     
     let navigate = useNavigate()
-    const loggedIn = () =>{
-        let adminPath = '/AdminPage'
-        navigate(adminPath)
+    const loggedIn = (userLogged,userType) =>{
+        let adminPath
+        (userType==='client') ? (adminPath='/ClientPage') : (adminPath='/AdminPage') 
+        navigate(adminPath,{state:{user:userLogged}})
     }
 
 
@@ -16,8 +17,8 @@ export  function LoginForm() {
         try{
             const response = await axios.post('http://localhost:3001/users/login', data);
             const userLogged = response.data.email
-            console.log('Bienvenido ' + userLogged)
-            loggedIn()
+            const userType = response.data.type
+            loggedIn(userLogged,userType)
             
         } catch(err){
             alert('Usuario invalido')
