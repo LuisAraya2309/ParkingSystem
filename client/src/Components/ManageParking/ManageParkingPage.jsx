@@ -16,7 +16,7 @@ export function ManageParkingPage() {
                     <br/>
                     <div className="row row-cols-2 row-cols-md-2 g-4">
                         
-                        <PrincipalCard props={{title:"Agregar un parqueo",buttonTitle:"Agregar",redirectLink:"/"}} />
+                        <PrincipalCard props={{title:"Agregar un parqueo",buttonTitle:"Agregar",redirectLink:"/CreateParking"}} />
 
                         <PrincipalCardSelect props={{title:"Consultar un parqueo",buttonTitle:"Consultar",redirectLink:"/", requiredItem:"DepartmentList"}} />
 
@@ -25,7 +25,6 @@ export function ManageParkingPage() {
                         <MangParkingForm props={{title:"Eliminar un parqueo",buttonTitle:"Eliminar"}} />
 
                     </div>
-                    
                     
                 </div>
             </div>

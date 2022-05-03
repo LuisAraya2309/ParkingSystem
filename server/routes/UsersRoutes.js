@@ -32,10 +32,7 @@ router.post("/getUserByEmail", async (req,res) => {
             res.json(result[0])
         }
     })
-    
-    
 })
-
 
 router.post("/createUser", async (req,res) => {
     const user = req.body;

@@ -15,7 +15,7 @@ export function MangParkingForm({props}) {
     }
     
     useEffect(() => {
-        axios.get('http://localhost:3001/parking/getParking').then((response) => {
+        axios.get('http://localhost:3001/parkings/getParking').then((response) => {
             setParkingList(response.data)
         })
       },[]);
@@ -23,7 +23,7 @@ export function MangParkingForm({props}) {
 
     const onSubmit = async(data) =>{
         try{
-            await axios.post('http://localhost:3001/parking/deleteByName', data);
+            await axios.post('http://localhost:3001/parkings/deleteParkingByName', data);
             moveTo()
             
         } catch(err){
