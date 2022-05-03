@@ -116,35 +116,39 @@ router.post("/updateById", async (req,res) => {
 router.post("/modifySchedule", async (req,res)=>{
 
     const user = {
-        "user" : "sebas123@itcr.ac.cr"//req.body[1]
+        "email" : req.body[1]
     }
 
     const newSchedule = {
         "schedule" : req.body[0].schedule,
         "days" : req.body[0].days,
-        "user" : req.body[1] //req.body[1]
+        "email" : req.body[1] //req.body[1]
     }
 
     UserModel.findOne({user},(err,result)=>{
         let foundUser ={}
         foundUser = result
         let oldSchedule = result.schedule
-        console.log(Object.keys(oldSchedule))
-        console.log(newSchedule.days)
-        newDays = newSchedule.days
-        oldDays = Object.keys(oldSchedule)
-        console.log(oldSchedule)
-        newDays.forEach(function(day,index){
+        let newDays = newSchedule.days
+        let oldDays = Object.keys(oldSchedule)
+        newDays.forEach(function(day){
            if(oldDays.includes(day)){
-               
-               oldSchedule[day].push(newSchedule.schedule) 
+               oldSchedule[day].push(newSchedule.schedule)
            }
            else{
             oldSchedule[day] = [newSchedule.schedule]
-
            } 
         })
-        console.log(oldSchedule)
+        //console.log(oldSchedule)
+
+        UserModel.findOneAndUpdate({email:user.email},{schedule:oldSchedule},{new:true},(error,data)=>{
+            if(error){
+                res.status(404).send('Horario inválido')
+
+            }else{
+                res.json(data)
+            }
+        })
         
     })
    
