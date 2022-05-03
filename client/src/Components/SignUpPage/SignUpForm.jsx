@@ -14,19 +14,6 @@ export function SignUpForm() {
         }catch(err){
                 alert('Usuario invalido')
         }
-        
-        /*
-        try{
-            const response = await axios.post('http://localhost:3001/createUser', data);
-            const userLogged = response.data.email
-            console.log('Bienvenido ' + userLogged)
-            
-        } catch(err){
-            alert('Usuario invalido')
-        }
-        */
-        
-    
     }
 
 

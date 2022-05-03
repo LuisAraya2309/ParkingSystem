@@ -10,7 +10,7 @@ export function PrincipalCard({props}) {
                     <h2 className="card-title">{props.title}</h2>
                     <p className="card-text">{props.body ? props.text : ""}</p>
                 </div>                                
-                <Link to={props.redirectLink} className="btn btn-danger">{props.buttonTitle}</Link>                                
+                <Link to={props.redirectLink} state={{userLogged:props.params}} className="btn btn-danger">{props.buttonTitle}</Link>                                
             </div>
         </div>
     </Fragment>

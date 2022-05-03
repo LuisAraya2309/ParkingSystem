@@ -1,7 +1,11 @@
 import React, { Fragment } from 'react'
 import { PrincipalCard } from '../GeneralResources/PrincipalCard'
+import { useLocation } from 'react-router-dom';
 
 export function ClientPage() {
+  const {state} = useLocation();
+  const userLogged = state.user
+
   return (
     <Fragment>
         <header className="App-header">
@@ -16,7 +20,7 @@ export function ClientPage() {
     
                             <PrincipalCard props={{title:"Reservar Parqueo",buttonTitle:"Realizar reserva",redirectLink:"/"}} />
     
-                            <PrincipalCard props={{title:"Modificar Horario",buttonTitle:"Modificar",redirectLink:"/ClientSchedule"}} />
+                            <PrincipalCard props={{title:"Modificar Horario",buttonTitle:"Modificar",redirectLink:"/ClientSchedule",params:userLogged}} />
                            
                         </div>
                                                 
