@@ -1,17 +1,16 @@
-import React,{Fragment} from 'react'
+import React,{Fragment,useEffect,useState} from 'react'
 import userLogo from '../../images/userLogo.png'
 import { useLocation } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
-import { DepartmentsList } from '../GeneralResources/DepartmentsList';
+import axios from 'axios';
 
-export  function ModifyPage() {
+export function ModifyPage() {
 
     const {state} = useLocation();
     const userInfo = state.userInfo;
     const {register,handleSubmit} = useForm();
+    const [departmentsList,setDepartmentsList] = useState([]);
 
-    console.log("userInfo")
-    console.log(userInfo)
 
     const onSubmit = async(data) =>{
         try{
@@ -19,18 +18,13 @@ export  function ModifyPage() {
         }catch(err){
                 alert('Usuario invalido')
         }
-        
-        /*
-        try{
-            const response = await axios.post('http://localhost:3001/createUser', data);
-            const userLogged = response.data.email
-            console.log('Bienvenido ' + userLogged)
-            
-        } catch(err){
-            alert('Usuario invalido')
-        }
-        */
     }
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/departments/getDepartments').then((response) => {
+          setDepartmentsList(response.data)
+        })
+      },[]);
 
   return (
       <Fragment>
@@ -77,7 +71,16 @@ export  function ModifyPage() {
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Departamentos</label>
-                                                <DepartmentsList />
+                                                
+                                                <select className="form-select" defaultValue={'DEFAULT'} aria-label="Departamento" {...register('department',{required:true})}>
+                                                    <option value="DEFAULT" disabled>Departamento</option>
+                                                    {departmentsList.map((department) =>{
+                                                    return (
+                                                        <option key={department.code} value={department.code}>{department.code + '-'+ department.name}</option>
+                                                    );
+                                                    })}
+                                                </select>
+
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Teléfono</label>

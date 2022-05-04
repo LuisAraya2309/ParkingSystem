@@ -1,6 +1,5 @@
 import React,{Fragment} from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
-import { PrincipalCardSelect } from '../GeneralResources/PrincipalCardSelect'
 import { PrincipalCard } from '../GeneralResources/PrincipalCard'
 import { MangParkingForm } from './MangParkingForm'
 
@@ -18,11 +17,11 @@ export function ManageParkingPage() {
                         
                         <PrincipalCard props={{title:"Agregar un parqueo",buttonTitle:"Agregar",redirectLink:"/CreateParking"}} />
 
-                        <PrincipalCardSelect props={{title:"Consultar un parqueo",buttonTitle:"Consultar",redirectLink:"/", requiredItem:"DepartmentList"}} />
+                        <MangParkingForm props={{title:"Consultar un parqueo",buttonTitle:"Consultar", action:"Consultar"}} />
 
-                        <PrincipalCard props={{title:"Modificar información de un parqueo",buttonTitle:"Actualizar",redirectLink:"/"}} />
+                        <MangParkingForm props={{title:"Modificar información",buttonTitle:"Actualizar", action:"Actualizar"}} />
 
-                        <MangParkingForm props={{title:"Eliminar un parqueo",buttonTitle:"Eliminar"}} />
+                        <MangParkingForm props={{title:"Eliminar un parqueo",buttonTitle:"Eliminar", action:"Eliminar"}} />
 
                     </div>
                     

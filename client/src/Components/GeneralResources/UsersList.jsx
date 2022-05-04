@@ -11,24 +11,21 @@ export function UsersList({props}) {
 
   let navigate = useNavigate()
   const moveTo = (userInformation) =>{
-  let path
-  (props.action === 1) ? (path = '/ModifyPage') : (path = '/ManageUsers')
-  navigate(path, {state:{userInfo:userInformation}})
+    let path
+    (props.action === 1) ? (path = '/ModifyPage') : (path = '/ManageUsers')
+    navigate(path, {state:{userInfo:userInformation}})
   }
   
   const onSubmit = async(data) =>{
       try{
-        console.log(data.username);
-        let userInformation
           if(props.action === 1){
             axios.post('http://localhost:3001/users/getUserByEmail',data).then((response) => {
-            userInformation = response.data
-            moveTo(userInformation)
+            moveTo(response.data)
             })
           }else{
-            userInformation = null
-            /*await axios.post('http://localhost:3001/users/deleteById', data);*/
-            moveTo(userInformation)
+            axios.post('http://localhost:3001/users/deleteById',data).then((response) => {
+            moveTo(response.data)
+            })
           } 
           
           

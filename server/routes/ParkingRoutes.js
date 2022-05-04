@@ -15,9 +15,7 @@ router.post("/createParking", async (req,res) => {
 
 router.post("/deleteParkingByName", async (req,res) => {
     
-    const parkingName = {"name":req.body.name}
-    
-    ParkingModel.remove({"name":parkingName.name}, (err,result) =>{
+    ParkingModel.remove([{$match:{name:{$eq:req.body.name}}}], (err,result) =>{
         if (err){
             res.status(404).send('User not found')
         }
@@ -25,7 +23,7 @@ router.post("/deleteParkingByName", async (req,res) => {
             res.status(404).send('User not found')
         }
         else{
-            res.json(parkingName)
+            res.json(result[0])
         }
     })
 })
@@ -59,6 +57,22 @@ router.get("/getParking",(req,res) => {
         }
     })
 })
+
+router.post("/getParkingByName", async (req,res) => {
+    ParkingModel.aggregate([{$match:{name:{$eq:req.body.name}}}], (err,result) =>{
+        if (err){
+            res.status(404).send('User invalid')
+        }
+        if(result[0] === undefined){
+            res.status(404).send('User invalid')
+        }
+        else{
+            console.log('funciona')
+            res.json(result[0])
+        }
+    })
+})
+
 
 router.post("/getParkingByLocation", async (req,res) => {
     ParkingModel.aggregate([{$match:{location:{$eq:req.body.location}}}], (err,result) =>{
