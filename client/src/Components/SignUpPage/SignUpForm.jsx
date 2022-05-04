@@ -13,9 +13,10 @@ export function SignUpForm() {
 
     const onSubmit = async(data) =>{
         try{
-            console.log(data)
+            const response = await axios.post('http://localhost:3001/users/createUser', data);
+            console.log(response)
         }catch(err){
-                alert('Usuario invalido')
+                alert(err)
         }
     }
 
@@ -68,7 +69,7 @@ export function SignUpForm() {
                     <option value="DEFAULT" disabled>Departamento</option>
                     {departmentsList.map((department) =>{
                     return (
-                        <option key={department.code} value={department.code}>{department.code + '-'+ department.name}</option>
+                        <option key={department.code} value={department.code+ '-'+ department.name}>{department.code + '-'+ department.name}</option>
                     );
                     })}
                 </select>
