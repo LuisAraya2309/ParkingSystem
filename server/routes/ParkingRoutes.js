@@ -13,7 +13,7 @@ router.post("/createParking", async (req,res) => {
     res.json(parking)
 })
 
-router.post("/deleteByName", async (req,res) => {
+router.post("/deleteParkingByName", async (req,res) => {
     
     const parkingName = {"name":req.body.name}
     
