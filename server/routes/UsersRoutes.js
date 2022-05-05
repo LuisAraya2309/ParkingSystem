@@ -126,7 +126,7 @@ router.post("/modifySchedule", async (req,res)=>{
     }
 
     const newSchedule = {
-        "schedule" : req.body[0].schedule,
+        "schedule" : (req.body[0].scheduleB + '-' +  req.body[0].scheduleE),
         "days" : req.body[0].days,
         "email" : req.body[1] //req.body[1]
     }

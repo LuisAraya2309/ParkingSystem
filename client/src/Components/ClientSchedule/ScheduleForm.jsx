@@ -8,6 +8,7 @@ export function ScheduleForm({userLogged}) {
 
     const onSubmit = async(data) =>{
         try{
+            console.log(data)
             const response = await axios.post('http://localhost:3001/users/modifySchedule', [data,userLogged]);
             console.log(response)
         }catch(err){
@@ -20,8 +21,11 @@ export function ScheduleForm({userLogged}) {
   return (
     <Fragment>
         <form onSubmit={handleSubmit(onSubmit)}>
-            <h2>Ejemplo: 7:00am-1:00pm</h2>
-            <input type="text" className="form-control"  placeholder='Horario' id="schedule" {...register('schedule',{required:true})}/>
+            <h2>Hora de Inicio</h2>
+            <input type="time" className="form-control"  placeholder='Horario' id="schedule" {...register('scheduleB',{required:true})}/>
+            <br></br>
+            <h2>Hora de Fin</h2>
+            <input type="time" className="form-control"  placeholder='Horario' id="schedule" {...register('scheduleE',{required:true})}/>
 
             <br/>
             <h2>Día</h2>
