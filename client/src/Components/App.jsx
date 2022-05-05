@@ -23,6 +23,8 @@ import { ModifyPage } from './ManageUsers/ModifyPage';
 import { CreateParking } from './ManageParking/CreateParking';
 import { ModifyParking } from './ManageParking/ModifyParking';
 import { ConsultParking } from './ManageParking/ConsultParking';
+import { FunctionaryReport } from './FunctionaryReport/FunctionaryReport';
+
 
 export function App() {
   return (
@@ -63,6 +65,8 @@ export function App() {
                   <Route exact path="/ModifyParking" element={<ModifyParking />}/>
 
                   <Route exact path="/ConsultParking" element={<ConsultParking />}/>
+
+                  <Route exact path="/FunctionaryReport" element={<FunctionaryReport />}/>
 
               </Routes>
                 

@@ -19,7 +19,13 @@ export function ParkingInformation({parking}) {
             <br></br>
             <div className="row">
                 <div className="col">
-                    <input type="text" className="form-control" value={parking.schedule} aria-label="Horario" readOnly/>
+                    <input type="text" className="form-control" value={parking.schedule.opening_hour} aria-label="Horario" readOnly/>
+                </div>
+                <div className="col">
+                    <input type="text" className="form-control" value={parking.schedule.closing_time} aria-label="Horario" readOnly/>
+                </div>
+                <div className="col">
+                    <input type="text" className="form-control" value={parking.schedule.weekends_enabled} aria-label="Horario" readOnly/>
                 </div>
                 <div className="col">
                     <input type="text" className="form-control" value={parking.slotsAvailable} aria-label="Campos disponibles" readOnly/>
