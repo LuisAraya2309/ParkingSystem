@@ -13,7 +13,7 @@ export function ParkingList({props}) {
     const moveTo = (parkingInfo) =>{
         let path 
         if(props.action === 'Eliminar'){
-            path = "/ManageParking"
+            path = "/AdminPage"
         }else if(props.action === 'Consultar'){
             path = "/ConsultParking"
         }else{

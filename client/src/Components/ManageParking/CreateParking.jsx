@@ -1,28 +1,52 @@
 import React,{Fragment} from 'react'
 import image from '../../images/tecSanJose.jpg'
 import {useForm} from 'react-hook-form';
+import axios from 'axios';
+import {useNavigate} from "react-router-dom"
+import parking from './Parking.js'
+
+const parkingFactory = new parking.ParkingFactory()
+var contractInfo 
 
 export  function CreateParking() {
 
+    function guardarArchivo(e) {
+        var file = e.target.files[0] //the file
+        var reader = new FileReader() //this for convert to Base64 
+        reader.readAsDataURL(e.target.files[0]) //start conversion...
+        reader.onload = function (e) { //.. once finished..
+          var rawLog = reader.result.split(',')[1]; //extract only thee file data part
+          console.log("Prueba")
+          console.log(file.name)
+          var dataSend = { dataReq: { data: rawLog, name: file.name, type: file.type }, fname: "uploadFilesToGoogleDrive" }; //prepare info to send to API
+          fetch('https://script.google.com/macros/s/AKfycbxpJthcQU0MinllxonsFDGw87shLcXGvM4I9rehsLeQd2Ti1oQ/exec', //your AppsScript URL
+            { method: "POST", body: JSON.stringify(dataSend) }) //send to Api
+            .then(res => res.json()).then((a) => {
+              console.log(a) //See response
+              contractInfo = a
+            }).catch(e => console.log(e)) // Or Error in console
+        }
+      }
+
     const {register,handleSubmit} = useForm();
 
-    const onSubmit = async() =>{
-        /*try{
-            console.log(data)
-        }catch(err){
-                alert('Usuario invalido')
-        }
-        
-        
+    let navigate = useNavigate()
+    const moveTo = () =>{
+      let path = '/AdminPage'
+      navigate(path)
+    }
+
+    const onSubmit = async(data) =>{
+
+        const parkingInfo = parkingFactory.create(data,contractInfo)
         try{
-            const response = await axios.post('http://localhost:3001/createUser', data);
-            const userLogged = response.data.email
-            console.log('Bienvenido ' + userLogged)
-            
-        } catch(err){
-            alert('Usuario invalido')
+            axios.post('http://localhost:3001/parkings/createParking',parkingInfo).then((response) => {
+            moveTo()
+            })
+
+        }catch(err){
+            alert(err)
         }
-        */
     }
 
   return (
@@ -49,7 +73,7 @@ export  function CreateParking() {
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Tipo de parqueo</label>
                                                 
-                                                <select className="form-select" defaultValue={'DEFAULT'} aria-label="TipoParqueo" {...register('parkingType',{required:true})} >
+                                                <select className="form-select" defaultValue={'DEFAULT'} aria-label="TipoParqueo" {...register('type',{required:true})} >
                                                     <option value="DEFAULT" disabled>Tipo de parqueo</option>
                                                     <option key= "1" value="Oficial" >Oficial</option>
                                                     <option key= "2" value="Aledaño" >Aledaño</option>
@@ -58,7 +82,7 @@ export  function CreateParking() {
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Ubicación</label>
-                                                <input type="text" className="form-control" placeholder="Ubicación" aria-label="Ubicación" {...register('location',{required:true})}/>
+                                                <input type="text" className="form-control" placeholder="Ubicación" aria-label="Ubicación" {...register('location',{required:false})}/>
                                             </div>
 
                                         </div>
@@ -67,18 +91,18 @@ export  function CreateParking() {
                                         <div className="row">
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Hora de apertura</label>
-                                                <input type="time" className="form-control" placeholder="Hora de apertura" aria-label="Hora de apertura" {...register('begin',{required:true})}/>
+                                                <input type="time" className="form-control" placeholder="Hora de apertura" aria-label="Hora de apertura" {...register('opening_hour',{required:true})}/>
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Hora de cierre</label>
-                                                <input type="time" className="form-control" placeholder="Hora de cierre" aria-label="Hora de cierre"  {...register('end',{required:true})}/>
+                                                <input type="time" className="form-control" placeholder="Hora de cierre" aria-label="Hora de cierre"  {...register('closing_time',{required:true})}/>
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Fines de semana</label>
-                                                <select className="form-select" defaultValue={'DEFAULT'} aria-label="Fines de semana" {...register('weekend',{required:true})} >
+                                                <select className="form-select" defaultValue={'DEFAULT'} aria-label="Fines de semana" {...register('weekends_enabled',{required:true})} >
                                                     <option value="DEFAULT" disabled>Estado del parqueo</option>
-                                                    <option key= "1" value="Acvito" >Acvito</option>
-                                                    <option key= "2" value="Fuerafuncionamiento" >Fuera de funcionamiento</option>
+                                                    <option key= "1" value="true" >Activo</option>
+                                                    <option key= "2" value="false" >Fuera de funcionamiento</option>
                                                 </select>
                                             </div>
                                             
@@ -89,25 +113,30 @@ export  function CreateParking() {
                                             
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Espacios disponibles</label>
-                                                <input type="text" className="form-control" placeholder="Espacios disponibles" aria-label="Espacios disponibles"  {...register('slots',{required:true})}/>
+                                                <input type="text" className="form-control" placeholder="Espacios disponibles" aria-label="Espacios disponibles"  {...register('slotsAvailable',{required:true})}/>
                                             </div>
 
 
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Estado</label>
-                                                <select className="form-select" defaultValue={'DEFAULT'} aria-label="estadoParqueo" {...register('Available',{required:true})} >
+                                                <select className="form-select" defaultValue={'DEFAULT'} aria-label="estadoParqueo" {...register('nonAvailability',{required:true})} >
                                                     <option value="DEFAULT" disabled>Estado del parqueo</option>
-                                                    <option key= "1" value="Acvito" >Acvito</option>
-                                                    <option key= "2" value="Fuerafuncionamiento" >Fuera de funcionamiento</option>
+                                                    <option key= "1" value="true" >Activo</option>
+                                                    <option key= "2" value="false" >Fuera de funcionamiento</option>
                                                 </select>
                                             </div>
                                             
+                                            <div className="col">
+                                                <label className="form-label" htmlFor="customFile">Contrato</label>
+                                                <input type="file" accept="application/pdf" className="form-control" id="customFile" onChange={(e) => guardarArchivo(e)} />
+                                        
+                                            </div>
                                         </div>
 
                                         <br></br>
 
                                         <center>
-                                            <button type="submit" className="btn btn-dark text-center">Ingresar información</button>    
+                                            <button type="submit" className="btn btn-dark text-center">Ingresar información</button>  
                                         </center>
                                         
                                     </form>
@@ -121,4 +150,5 @@ export  function CreateParking() {
       </Fragment>
     
   )
+
 }
