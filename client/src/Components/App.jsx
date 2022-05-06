@@ -12,7 +12,6 @@ import { SignUp } from './SignUpPage/SignUp';
 import {QueriesPage} from './QueriesModule/QueriesPage'
 import { HomePage } from './UserHome/HomePage';
 import { UserInformation } from './UserInformation/UserInformation';
-import { ManageParkingPage } from './ManageParking/ManageParkingPage';
 import { ManageUsersPage } from './ManageUsers/ManageUsersPage';
 import { ClientPage } from './ClientPage/ClientPage';
 import { ModifySchedule } from './ClientSchedule/ModifySchedule';
@@ -23,6 +22,10 @@ import { ModifyPage } from './ManageUsers/ModifyPage';
 import { CreateParking } from './ManageParking/CreateParking';
 import { ModifyParking } from './ManageParking/ModifyParking';
 import { ConsultParking } from './ManageParking/ConsultParking';
+import { FunctionaryReport } from './FunctionaryReport/FunctionaryReport';
+import { ManageParkingPage } from './ManageParking/ManageParkingPage';
+import { ReportsPage } from './ScheduleReports/ReportsPage';
+
 
 export function App() {
   return (
@@ -63,6 +66,11 @@ export function App() {
                   <Route exact path="/ModifyParking" element={<ModifyParking />}/>
 
                   <Route exact path="/ConsultParking" element={<ConsultParking />}/>
+
+                  <Route exact path="/FunctionaryReport" element={<FunctionaryReport />}/>
+
+                  <Route exact path="/ScheduleReports" element={<ReportsPage />}/>
+
 
               </Routes>
                 

@@ -14,9 +14,9 @@ export function QueriesPage() {
                         
                         <PrincipalCard props={{title:"Parqueos Registrados",buttonTitle:"Realizar Consulta",redirectLink:"/"}} />
 
-                        <PrincipalCard props={{title:"Informe de funcionarios",buttonTitle:"Realizar Consulta",redirectLink:"/"}} />
+                        <PrincipalCard props={{title:"Informe de funcionarios",buttonTitle:"Realizar Consulta",redirectLink:"/FunctionaryReport"}} />
 
-                        <PrincipalCard props={{title:"Franja Horaria",buttonTitle:"Realizar Consulta",redirectLink:"/QueriesPage"}} />
+                        <PrincipalCard props={{title:"Franja Horaria",buttonTitle:"Realizar Consulta",redirectLink:"/ScheduleReports"}} />
                        
                         <PrincipalCard props={{title:"Consultar información de un usuario",buttonTitle:"Realizar Consulta",redirectLink:"/UserInformation"}} />
  
