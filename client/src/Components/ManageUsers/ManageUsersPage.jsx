@@ -18,9 +18,9 @@ export function ManageUsersPage() {
                         
                         <PrincipalCard props={{title:"Registrar un usuario",buttonTitle:"Registrar un usuario",redirectLink:"/SignUpPage"}} />
 
-                        <ManageUsersForm props={{title:"Eliminar usuario",buttonTitle:"Eliminar usuario", action:2}} />
+                        <ManageUsersForm props={{title:"Eliminar un usuario del sistema",buttonTitle:"Eliminar usuario", action:2}} />
                     
-                        <ManageUsersForm props={{title:"Modificar información de usuario",buttonTitle:"Realizar Consultas", action:1}} />
+                        <ManageUsersForm props={{title:"Modificar información de un usuario",buttonTitle:"Modificar información", action:1}} />
 
                     </div>
                     

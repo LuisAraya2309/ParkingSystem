@@ -66,7 +66,12 @@ export function ConsultParking() {
                                             <label htmlFor="text" className="form-label">Estado</label>
                                             <input type="text" className="form-control" placeholder="estadoParqueo" aria-label="estadoParqueo" value = {parkingInfo.nonAvailability} readOnly/>
                                         </div>
-                                        
+
+                                        <div className="col">
+                                            <label htmlFor="text" className="form-label">Contrato</label>
+                                            <br></br>
+                                            <a href = {parkingInfo.contract} className="btn btn-danger">Visualizar</a>
+                                        </div>
                                     </div>
 
                                     <br></br>
