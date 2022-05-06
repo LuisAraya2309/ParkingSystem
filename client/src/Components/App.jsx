@@ -25,6 +25,7 @@ import { ConsultParking } from './ManageParking/ConsultParking';
 import { FunctionaryReport } from './FunctionaryReport/FunctionaryReport';
 import { ManageParkingPage } from './ManageParking/ManageParkingPage';
 import { ReportsPage } from './ScheduleReports/ReportsPage';
+import { RegisteredParkings } from './RegisteredParkings/RegisteredParkings';
 
 
 export function App() {
@@ -71,6 +72,7 @@ export function App() {
 
                   <Route exact path="/ScheduleReports" element={<ReportsPage />}/>
 
+                  <Route exact path="/RegisteredParkings" element={<RegisteredParkings />}/>
 
               </Routes>
                 

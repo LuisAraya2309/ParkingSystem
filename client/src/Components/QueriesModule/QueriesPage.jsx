@@ -12,7 +12,7 @@ export function QueriesPage() {
                     <br/>
                     <div className="row row-cols-1 row-cols-md-4 g-4">
                         
-                        <PrincipalCard props={{title:"Parqueos Registrados",buttonTitle:"Realizar Consulta",redirectLink:"/"}} />
+                        <PrincipalCard props={{title:"Parqueos Registrados",buttonTitle:"Realizar Consulta",redirectLink:"/RegisteredParking"}} />
 
                         <PrincipalCard props={{title:"Informe de funcionarios",buttonTitle:"Realizar Consulta",redirectLink:"/FunctionaryReport"}} />
 

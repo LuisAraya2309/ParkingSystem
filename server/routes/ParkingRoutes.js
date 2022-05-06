@@ -88,9 +88,11 @@ router.post("/getParkingByLocation", async (req,res) => {
         }
     })
 })
-/*
+
 router.post("/getParkingBySchedule", async (req,res) => {
-    ParkingModel.aggregate([{$match:{location:{$eq:req.body.Schedule.opening_hour}}},{$match:{location:{$eq:req.body.Schedule.closing_time}}}],(err,result) =>{
+    const opening_hour = req.body.opening_hour
+    const closing_time = req.body.closing_time
+    ParkingModel.aggregate([{$match:{schedule:{$eq:opening_hour}}},{$match:{schedule:{$eq:closing_time}}}],(err,result) =>{
         if (err){
             res.status(404).send('Parking invalid 1')
         }
@@ -102,6 +104,6 @@ router.post("/getParkingBySchedule", async (req,res) => {
             res.json(result[0])
         }
     })
-})*/
+})
 //missing final schedule model
 module.exports = router;
