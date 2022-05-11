@@ -1,5 +1,8 @@
 const router = require('express').Router();
 const UserModel = require('../models/Users')
+const ReportClientModel = require('../models/ReportsClient')
+const ReportAdminModel = require('../models/ReportsAdmin')
+const ReportModel = require('../models/Reports')
 //Login page
 
 router.post("/",async(req,res)=>{
@@ -131,22 +134,79 @@ router.post("/modifySchedule", async (req,res)=>{
         "email" : req.body[1] //req.body[1]
     }
 
-    UserModel.findOne({user},(err,result)=>{
+
+
+    const searchZone = (hour) =>{
+        const ceroAdded = (hour.toString().length===2) ? (""):("0")
+        if((parseInt(hour,10)%2)===0){
+            hour -=1
+            let endHour = hour+2
+            let newHour = ceroAdded+hour.toString() + ":00-" + endHour.toString()+":00" 
+            return newHour
+        }
+        let endHour = hour + 2
+        return (ceroAdded+hour.toString() + ":00-" + endHour.toString()+":00")
+    }
+
+
+
+    UserModel.findOne({email:user.email},(err,result)=>{
         let foundUser ={}
         foundUser = result
         let oldSchedule = result.schedule
         let newDays = newSchedule.days
         let oldDays = Object.keys(oldSchedule)
+
+        const isAdmin = "admin" == foundUser.type
+
         newDays.forEach(function(day){
            if(oldDays.includes(day)){
                oldSchedule[day].push(newSchedule.schedule)
            }
            else{
             oldSchedule[day] = [newSchedule.schedule]
-           } 
-        })
-        //console.log(oldSchedule)
+           }
+           
+           
+           ReportModel.findOneAndUpdate({Day:day},{$inc:{usage:1}},{new:true},(err,result)=>{
+                if(err){
+                    res.status(404).send('Error incrementando el usage')
+                }
+           })
+           
 
+           
+
+        })
+
+        const firstHour = newSchedule.schedule.split(':')[0]
+        const zoneDesigned = searchZone(parseInt(firstHour,10))
+
+        console.log(zoneDesigned)
+
+        if(isAdmin){
+            ReportAdminModel.findOneAndUpdate({zone:zoneDesigned},{$inc:{usage:1}},{new:true},(err,result)=>{
+                if(err){
+                    res.status(404).send('Error incrementando el usage')
+                }
+                console.log(result)
+            })
+            
+        }else{  //then is client
+           
+            ReportClientModel.findOneAndUpdate({zone:zoneDesigned},{$inc:{usage:1}},{new:true},(err,result)=>{
+                if(err){
+                    res.status(404).send('Error incrementando el usage')
+                }
+                console.log(result)
+            })
+            
+            
+        }
+        
+        
+
+        
         UserModel.findOneAndUpdate({email:user.email},{schedule:oldSchedule},{new:true},(error,data)=>{
             if(error){
                 res.status(404).send('Horario inválido')
@@ -155,6 +215,7 @@ router.post("/modifySchedule", async (req,res)=>{
                 res.json(data)
             }
         })
+        
         
     })
    
