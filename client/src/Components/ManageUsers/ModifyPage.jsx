@@ -21,7 +21,7 @@ export function ModifyPage() {
     const onSubmit = async(data) =>{
         try{
             console.log(data);
-            axios.post('http://localhost:3001/users/updateByEmail',data).then((response) => {
+            axios.post('http://localhost:3001/users/updateByID',data).then((response) => {
             moveTo()
             })
         }catch(err){
@@ -55,8 +55,8 @@ export function ModifyPage() {
                                         <div className="row">
 
                                             <div className="col">
-                                                <label htmlFor="text" className="form-label">Correo</label>
-                                                <input type="text" className="form-control" value= {userInfo.email} {...register('username',{required:true})}/>
+                                                <label htmlFor="text" className="form-label">Identificación</label>
+                                                <input type="text" className="form-control" value= {userInfo._id} {...register('_id',{required:true})}/>
                                             </div>
 
                                             <div className="col">

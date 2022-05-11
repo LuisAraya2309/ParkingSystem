@@ -90,12 +90,12 @@ router.post("/login", async (req,res) => {
 })
 
 
-router.post("/updateByEmail", async (req,res) => {
+router.post("/updateByID", async (req,res) => {
     
     const setAttributes = {name: req.body.name, lastname1: req.body.lastname1, lastname2: req.body.lastname2, password: req.body.password,
         altEmail: req.body.altEmail, department:req.body.department, phone:req.body.phone, vehicles:[req.body.vehicles]};
     
-    UserModel.findOneAndUpdate({email:req.body.username},{setAttributes},{new:true},(err,result) =>{
+    UserModel.findOneAndUpdate({_id:req.body._id},{setAttributes},{new:true},(err,result) =>{
         console.log(result)
     })
     

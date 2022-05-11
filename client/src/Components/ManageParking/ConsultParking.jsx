@@ -8,6 +8,20 @@ export function ConsultParking() {
     const {state} = useLocation();
     const parkingInfo = state.parkingInfo;
 
+    /*
+    if(parkingInfo['nonAvailability']){
+        parkingInfo['nonAvailability'] = 'Activo' 
+    }else{
+        parkingInfo['nonAvailability'] = 'Fuera de servicio' 
+    }
+
+    if(!parkingInfo['schedule']['weekends_enabled']){
+        console.log( parkingInfo['schedule']['weekends_enabled'])
+        parkingInfo['schedule']['weekends_enabled'] = 'Activo' 
+    }else{
+        parkingInfo['schedule']['weekends_enabled'] = 'Fuera de servicio'
+    }*/
+
   return (
     <Fragment>
         <header className="App-header">
