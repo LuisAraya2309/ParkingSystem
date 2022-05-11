@@ -4,33 +4,38 @@ const ParkingSchema = new mongoose.Schema({
     
     name:{
         type:String,
-        required:true,
+        required:false,
     },
 
     type:{
         type:String,
-        required:true,
+        required:false,
     },
 
     location:{
         type:String,
-        required:true,
+        required:false,
     },
 
     schedule:{
         type:Object,
-        required:true,
+        required:false,
     },
 
     slotsAvailable:{
         type:Number,
-        required:true,
+        required:false,
     },
 
     nonAvailability:{
         type:String,
-        required:true,
+        required:false,
     },
+
+    contract:{
+        type:String,
+        required:false,
+    }
 });
 
 const ParkingModel = mongoose.model("parkings",ParkingSchema)

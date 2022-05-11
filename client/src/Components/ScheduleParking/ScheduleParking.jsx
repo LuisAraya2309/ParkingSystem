@@ -14,7 +14,7 @@ export function ScheduleParking() {
     try{
       console.log(data)
       setparkingName(data.parkingName)
-      axios.post('http://localhost:3001/parkings/getParkingByLocation',data).then((response) => {//cambiar
+      axios.post('http://localhost:3001/parkings/getParkingBySchedule',data).then((response) => {//cambiar
         setParkingInfo(response.data)
     })
         
@@ -35,7 +35,10 @@ export function ScheduleParking() {
                             <center>
                               <form onSubmit={handleSubmit(onSubmit)}>
                                 <h1>{parkingName}</h1>
-                                <input  type="text" id="location" required {...register('location',{required:true})}/>
+                                <h2>Hora de apertura</h2>
+                                <input  type="text" id="opening_hour"/>
+                                <h2>Hora de cierre</h2>
+                                <input  type="text" id="closing_time" required {...register('opening_hour','closing_time')}/>
                                 <br/>
                                 <input className="btn btn-dark text-center" type='submit' value='Consultar'/>
                               </form>

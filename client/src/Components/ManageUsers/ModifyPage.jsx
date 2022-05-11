@@ -2,6 +2,7 @@ import React,{Fragment,useEffect,useState} from 'react'
 import userLogo from '../../images/userLogo.png'
 import { useLocation } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
+import {useNavigate} from "react-router-dom";
 import axios from 'axios';
 
 export function ModifyPage() {
@@ -11,14 +12,23 @@ export function ModifyPage() {
     const {register,handleSubmit} = useForm();
     const [departmentsList,setDepartmentsList] = useState([]);
 
+    let navigate = useNavigate()
+    const moveTo = () =>{
+        let path = "/ManageUsers"
+        navigate(path)
+    }
 
     const onSubmit = async(data) =>{
         try{
-            console.log(data)
+            console.log(data);
+            axios.post('http://localhost:3001/users/updateByID',data).then((response) => {
+            moveTo()
+            })
         }catch(err){
                 alert('Usuario invalido')
         }
     }
+
 
     useEffect(() => {
         axios.get('http://localhost:3001/departments/getDepartments').then((response) => {
@@ -43,21 +53,27 @@ export function ModifyPage() {
                                     
                                     <form onSubmit={handleSubmit(onSubmit)} >
                                         <div className="row">
+
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Identificación</label>
+                                                <input type="text" className="form-control" value= {userInfo._id} {...register('_id',{required:true})}/>
+                                            </div>
+
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Nombre</label>
-                                                <input type="text" className="form-control" placeholder="Nombre" aria-label="Nombre" value = {userInfo.name} {...register('name',{required:true})}/>
+                                                <input type="text" className="form-control" placeholder={userInfo.name} {...register('name',{required:true})}/>
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Apellido 1</label>
-                                                <input type="text" className="form-control" placeholder="Apellido 1" aria-label="Apellido 1" value = {userInfo.lastname1} {...register('lastname1',{required:true})}/>
+                                                <input type="text" className="form-control" placeholder={userInfo.lastname1} {...register('lastname1',{required:true})}/>
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Apellido 2</label>
-                                                <input type="text" className="form-control" placeholder="Apellido 2" aria-label="Apellido 2" value = {userInfo.lastname2} {...register('lastname2',{required:true})}/>
+                                                <input type="text" className="form-control"  placeholder={userInfo.lastname2} {...register('lastname2',{required:true})}/>
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Contraseña</label>
-                                                <input type="text" className="form-control" placeholder="Contraseña" aria-label="Contraseña" value = {userInfo.password} {...register('password',{required:true})}/>
+                                                <input type="text" className="form-control"  placeholder={userInfo.password} {...register('password',{required:true})}/>
                                             </div>
 
                                         </div>
@@ -67,7 +83,7 @@ export function ModifyPage() {
                                         <div className="row">
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Correo alterno</label>
-                                                <input type="email" className="form-control" placeholder="Correo alterno" aria-label="Correo alterno" value = {userInfo.altEmail} {...register('altEmail',{required:true})}/>
+                                                <input type="email" className="form-control"  placeholder={userInfo.altEmail} {...register('altEmail',{required:true})}/>
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Departamentos</label>
@@ -84,14 +100,15 @@ export function ModifyPage() {
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Teléfono</label>
-                                                <input type="text" className="form-control" placeholder="Teléfono" aria-label="Teléfono" value = {userInfo.phone} {...register('phone',{required:true})}/>
+                                                <input type="text" className="form-control" placeholder={userInfo.phone} {...register('phone',{required:true})}/>
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Placas</label>
-                                                <input type="text" className="form-control" placeholder="Placas" aria-label="Placas" value = {userInfo.vehicles} {...register('vehicules',{required:true})}/>
+                                                <input type="text" className="form-control"  placeholder={userInfo.vehicles} {...register('vehicles',{required:true})}/>
                                             </div>
                                             
                                         </div>
+                                        <br></br>
                                         <center>
                                             <button type="submit" className="btn btn-dark text-center">Modificar información</button>    
                                         </center>

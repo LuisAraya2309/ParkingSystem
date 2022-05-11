@@ -8,6 +8,20 @@ export function ConsultParking() {
     const {state} = useLocation();
     const parkingInfo = state.parkingInfo;
 
+    /*
+    if(parkingInfo['nonAvailability']){
+        parkingInfo['nonAvailability'] = 'Activo' 
+    }else{
+        parkingInfo['nonAvailability'] = 'Fuera de servicio' 
+    }
+
+    if(!parkingInfo['schedule']['weekends_enabled']){
+        console.log( parkingInfo['schedule']['weekends_enabled'])
+        parkingInfo['schedule']['weekends_enabled'] = 'Activo' 
+    }else{
+        parkingInfo['schedule']['weekends_enabled'] = 'Fuera de servicio'
+    }*/
+
   return (
     <Fragment>
         <header className="App-header">
@@ -66,7 +80,12 @@ export function ConsultParking() {
                                             <label htmlFor="text" className="form-label">Estado</label>
                                             <input type="text" className="form-control" placeholder="estadoParqueo" aria-label="estadoParqueo" value = {parkingInfo.nonAvailability} readOnly/>
                                         </div>
-                                        
+
+                                        <div className="col">
+                                            <label htmlFor="text" className="form-label">Contrato</label>
+                                            <br></br>
+                                            <a href = {parkingInfo.contract} className="btn btn-danger">Visualizar</a>
+                                        </div>
                                     </div>
 
                                     <br></br>

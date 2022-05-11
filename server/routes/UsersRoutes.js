@@ -37,6 +37,21 @@ router.post("/getUserByEmail", async (req,res) => {
     })
 })
 
+router.post("/deleteUserByEmail", async (req,res) => {
+
+    UserModel.deleteOne({email:req.body.username}, (err,result) =>{
+        
+        const validName = result[0] === undefined
+        if(!validName){
+            res.status(404).send('Parking not found')
+        }
+        else{
+            res.json(result[0])
+        }
+    });
+})
+
+
 router.post("/createUser", async (req,res) => {
 
     const newUser = req.body;
@@ -77,49 +92,17 @@ router.post("/login", async (req,res) => {
     })
 })
 
-router.post("/createCompleteUser", async (req,res) => {
-    const user = req.body;
-    const newUser = new CompleteUserModel(user);
-    await newUser.save();
 
-    res.json(user)
-})
-
-router.post("/deleteById", async (req,res) => {
+router.post("/updateByID", async (req,res) => {
     
-    const idUser = {"ID":req.body.ID}
+    const setAttributes = {name: req.body.name, lastname1: req.body.lastname1, lastname2: req.body.lastname2, password: req.body.password,
+        altEmail: req.body.altEmail, department:req.body.department, phone:req.body.phone, vehicles:[req.body.vehicles]};
     
-    CompleteUserModel.remove({"ID":idUser.ID}, (err,result) =>{
-        if (err){
-            res.status(404).send('User not found')
-        }
-        if(result[0] === undefined){
-            res.status(404).send('User not found')
-        }
-        else{
-            res.json(idUser)
-        }
+    UserModel.findOneAndUpdate({_id:req.body._id},{setAttributes},{new:true},(err,result) =>{
+        console.log(result)
     })
-})
-
-router.post("/updateById", async (req,res) => {
     
-    const user = {
-        "identification":req.body.id,
-        "newAttribute":req.dody.newAttribute
-    }
-    
-    CompleteUserModel.update({identification:user.identification},{$set: {newAttribute: user.newAttribute}},(err,result) =>{
-        if (err){
-            res.status(404).send('User not found')
-        }
-        if(result[0] === undefined){
-            res.status(404).send('User not found')
-        }
-        else{
-            res.json(user)
-        }
-    })
+    console.log(req.body)
 })
 
 router.post("/modifySchedule", async (req,res)=>{

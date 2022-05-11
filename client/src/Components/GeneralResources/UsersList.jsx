@@ -23,7 +23,7 @@ export function UsersList({props}) {
             moveTo(response.data)
             })
           }else{
-            axios.post('http://localhost:3001/users/deleteById',data).then((response) => {
+            axios.post('http://localhost:3001/users/deleteUserByEmail',data).then((response) => {
             moveTo(response.data)
             })
           } 
@@ -47,7 +47,7 @@ export function UsersList({props}) {
           <option value="DEFAULT" disabled>Usuarios</option>
           {usersList.map((user) =>{
               return (
-                  <option key={user.ID} value={user.id} > {user.email/*name + ' '+ user.lastname1 + ' '+ user.lastname2*/}</option>
+                  <option key={user.ID} value={user.id} > {user.email}</option>
                   
                   );
           })}
