@@ -5,7 +5,7 @@ import { ParkingInformation } from '../CustumerInquieries/ParkingInformation';
 export function ScheduleParking() {
   
   const layoutInfo = {name:'',type:'',schedule:'',location:'',slotsAvaible:''}
-  const [parkingName,setparkingName] = useState('parking')
+  const [parkingName,setparkingName] = useState('Parqueo')
   const {register,handleSubmit} = useForm()
   const [ParkingInfo,setParkingInfo] = useState(layoutInfo)
   
@@ -35,10 +35,11 @@ export function ScheduleParking() {
                             <center>
                               <form onSubmit={handleSubmit(onSubmit)}>
                                 <h1>{parkingName}</h1>
-                                <h2>Hora de apertura</h2>
-                                <input  type="text" id="opening_hour"/>
+                                <h2>Hora de apertura</h2>                            
+                                <input  type="time" id="opening_hour" {...register('opening_hour',{required:true})}/>
+                                <br/>
                                 <h2>Hora de cierre</h2>
-                                <input  type="text" id="closing_time" required {...register('opening_hour','closing_time')}/>
+                                <input  type="time" id="closing_time"  {...register('closing_time',{required:true})}/>
                                 <br/>
                                 <input className="btn btn-dark text-center" type='submit' value='Consultar'/>
                               </form>
