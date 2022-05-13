@@ -43,7 +43,7 @@ export function PersonalInformation({user}) {
                     <input type="text" className="form-control" value={user.department} aria-label="Departamento" readOnly/>
                 </div>
                 <div className="col">
-                    <input type="text" className="form-control" value={user.vehicules} aria-label="Placas" readOnly/>
+                    <input type="text" className="form-control" value={user.vehicles} aria-label="Placas" readOnly/>
                 </div>
                 
             </div>

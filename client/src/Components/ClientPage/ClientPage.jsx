@@ -5,6 +5,8 @@ import { useLocation } from 'react-router-dom';
 export function ClientPage() {
   const {state} = useLocation();
   const userLogged = state.user
+  
+  
 
   return (
     <Fragment>
