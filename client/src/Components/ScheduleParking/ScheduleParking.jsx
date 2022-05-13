@@ -35,10 +35,12 @@ export function ScheduleParking() {
                             <center>
                               <form onSubmit={handleSubmit(onSubmit)}>
                                 <h1>{parkingName}</h1>
-                                <h2>Hora de apertura</h2>
-                                <input  type="time" id="opening_hour" required {...register('opening_hour',{required:true})}/>
+
+                                <h2>Hora de apertura</h2>                            
+                                <input  type="time" id="opening_hour" {...register('opening_hour',{required:true})}/>
+                                <br/>
                                 <h2>Hora de cierre</h2>
-                                <input  type="time" id="closing_time" required {...register('closing_time',{required:true})}/>
+                                <input  type="time" id="closing_time"  {...register('closing_time',{required:true})}/>
                                 <br/>
                                 <input className="btn btn-dark text-center" type='submit' value='Consultar'/>
                               </form>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Fragment } from 'react'
-import "./Table.css"
+//import "./Table.css"
 
 export function FunctionaryTable({functionarys}) {
   return (

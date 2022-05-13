@@ -5,7 +5,7 @@ const PORT = 3001
 const usersRouter = require('./routes/UsersRoutes')
 const departmentsRouter = require('./routes/DepartmentsRoutes')
 const parkingsRouter = require('./routes/ParkingRoutes')
-const reportsRouter = require('./routes/ReportsRoutes')
+
 
 const cors = require('cors')
 
@@ -14,7 +14,7 @@ app.use(cors())
 app.use('/users',usersRouter)
 app.use('/departments',departmentsRouter)
 app.use('/parkings',parkingsRouter)
-app.use('reports',reportsRouter)
+
 
 
 

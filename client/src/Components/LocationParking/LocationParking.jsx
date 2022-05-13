@@ -5,7 +5,7 @@ import { ParkingInformation } from '../CustumerInquieries/ParkingInformation';
 export function LocationParking() {
   
   const layoutInfo = {name:'',type:'',schedule:'',location:'',slotsAvaible:''}
-  const [parkingName,setparkingName] = useState('parking')
+  const [parkingName,setparkingName] = useState('Parqueo')
   const {register,handleSubmit} = useForm()
   const [ParkingInfo,setParkingInfo] = useState(layoutInfo)
   
