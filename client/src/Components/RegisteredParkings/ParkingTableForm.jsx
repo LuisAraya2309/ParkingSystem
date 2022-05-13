@@ -5,8 +5,7 @@ import "./TableParking.css"
 export function ParkingTableForm({parkings}) {
   return (
     <Fragment>
-        <table>
-            
+        <table class="table">
             <thead>
                 <tr>
                     <th>Nombre</th>

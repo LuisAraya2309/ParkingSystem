@@ -96,7 +96,7 @@ router.post("/getParkingByLocation", async (req,res) => {
 router.post("/getParkingBySchedule", async (req,res) => {
     const opening_hour = req.body.opening_hour
     const closing_time = req.body.closing_time
-    ParkingModel.aggregate([{$match:{schedule:{$eq:opening_hour}}},{$match:{schedule:{$eq:closing_time}}}],(err,result) =>{
+    ParkingModel.aggregate([{$match:{"schedule.opening_hour":{$eq:opening_hour}}},{$match:{"schedule.closing_time":{$eq:closing_time}}}],(err,result) =>{
         if (err){
             res.status(404).send('Parking invalid 1')
         }
