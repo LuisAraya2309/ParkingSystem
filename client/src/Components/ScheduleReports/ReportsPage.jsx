@@ -33,7 +33,7 @@ export function ReportsPage() {
                                 </div>
                                 <div className="carousel-item">
                                     <center>
-                                    <iframe styles="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);" width="800" height="480" src="https://charts.mongodb.com/charts-parkingsystem-fuknp/embed/charts?id=62748272-9b0b-4648-83bc-f4e1ba5c2384&maxDataAge=10&theme=light&attribution=false&autoRefresh=true"></iframe>
+                                    <iframe title = 'Parking Usage per Admins' styles="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);" width="800" height="480" src="https://charts.mongodb.com/charts-parkingsystem-fuknp/embed/charts?id=62748272-9b0b-4648-83bc-f4e1ba5c2384&maxDataAge=10&theme=light&attribution=false&autoRefresh=true"></iframe>
                                     </center>
                                 
                                 </div>

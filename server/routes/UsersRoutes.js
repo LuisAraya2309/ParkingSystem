@@ -31,7 +31,6 @@ router.post("/getUserByEmail", async (req,res) => {
             res.status(404).send('User invalid')
         }
         else{
-            console.log('funciona')
             res.json(result[0])
         }
     })
