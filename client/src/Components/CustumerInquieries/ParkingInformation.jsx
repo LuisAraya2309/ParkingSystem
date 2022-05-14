@@ -23,19 +23,21 @@ export function ParkingInformation({parking}) {
             <div className="row">
                 <div className="col">
                     <label htmlFor="text" className="form-label">Hora de apertura</label>
-                    <input type="text" className="form-control" value={parking.schedule.opening_hour} aria-label="Horario" readOnly/>
+                    <input type="text" className="form-control" value={parking.schedule.opening_hour} aria-label="schedule_opening" readOnly/>
                 </div>
                 <div className="col">
                     <label htmlFor="text" className="form-label">Hora de cierre</label>
-                    <input type="text" className="form-control" value={parking.schedule.closing_time} aria-label="Horario" readOnly/>
+                    <input type="text" className="form-control" value={parking.schedule.closing_time} aria-label="schedule_closing" readOnly/>
                 </div>
                 <div className="col">
                     <label htmlFor="text" className="form-label">Fines de semana</label>
-                    <input type="text" className="form-control" value={parking.schedule.weekends_enabled}  aria-label="Horario" readOnly/>
+                    {parking.schedule.weekends_enabled ?
+                    <input type="text" className="form-control"  value= 'Habilitado' aria-label="Horario_weekends" readOnly/>
+                    : <input type="text" className="form-control"  value= 'Inhabilitado' aria-label="schedule_weekends" readOnly/> }
                 </div>
                 <div className="col">
                     <label htmlFor="text" className="form-label">Campos disponibles</label>
-                    <input type="text" className="form-control" value={parking.slotsAvailable} aria-label="Campos disponibles" readOnly/>
+                    <input type="text" className="form-control" value={parking.slotsAvailable} aria-label="Slots_Available" readOnly/>
                 </div>
             </div>
             <br></br>

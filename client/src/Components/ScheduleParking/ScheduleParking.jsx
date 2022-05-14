@@ -4,7 +4,7 @@ import axios from 'axios';
 import { ParkingInformation } from '../CustumerInquieries/ParkingInformation';
 export function ScheduleParking() {
   
-  const layoutInfo = {name:'',type:'',schedule:'',location:'',slotsAvaible:''}
+  const layoutInfo = {name:'',type:'',schedule:{opening_hour:'',closing_time:'',weekends_enabled:false},location:'',slotsAvaible:''}
   const [parkingName,setparkingName] = useState('Parqueo')
   const {register,handleSubmit} = useForm()
   const [ParkingInfo,setParkingInfo] = useState(layoutInfo)
