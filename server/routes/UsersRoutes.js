@@ -23,7 +23,7 @@ router.get("/getUsers",(req,res) => {
 
 
 router.post("/getUserByEmail", async (req,res) => {
-    UserModel.aggregate([{$match:{email:{$eq:req.body.username}}}], (err,result) =>{
+    UserModel.aggregate([{$match:{email:{$eq:req.body.email}}}], (err,result) =>{
         if (err){
             res.status(404).send('User invalid')
         }
@@ -39,7 +39,7 @@ router.post("/getUserByEmail", async (req,res) => {
 
 router.post("/deleteUserByEmail", async (req,res) => {
 
-    UserModel.deleteOne({email:req.body.username}, (err,result) =>{
+    UserModel.deleteOne({email:req.body.email}, (err,result) =>{
         
         const validName = result[0] === undefined
         if(!validName){
@@ -94,15 +94,41 @@ router.post("/login", async (req,res) => {
 
 
 router.post("/updateByID", async (req,res) => {
-    
+
     const setAttributes = {name: req.body.name, lastname1: req.body.lastname1, lastname2: req.body.lastname2, password: req.body.password,
         altEmail: req.body.altEmail, department:req.body.department, phone:req.body.phone, vehicles:[req.body.vehicles]};
-    
-    UserModel.findOneAndUpdate({_id:req.body._id},{setAttributes},{new:true},(err,result) =>{
-        console.log(result)
+
+    UserModel.aggregate([{$match:{ID:{$eq:req.body.ID}}}], (err,result) =>{
+        if (err){
+            res.status(404).send('User invalid')
+        }
+        if(result[0] === undefined){
+            res.status(404).send('User invalid')
+        }
+        else{
+            console.log(result)
+            console.log(result[0].ID)
+            UserModel.findOneAndUpdate({ID:result[0].ID},{setAttributes},{new:true},(err,result) =>{})
+        }
     })
-    
-    console.log(req.body)
+})
+
+
+router.post("/updateUsers", async (req,res) => {
+
+    const setAttributes = {name: req.body.name, lastname1: req.body.lastname1, lastname2: req.body.lastname2, password: req.body.password,
+        altEmail: req.body.altEmail, department:req.body.department, phone:req.body.phone, vehicles:[req.body.vehicles]};
+
+    UserModel.updateOne({email:req.body.email},{$set:setAttributes},(err,result) =>{
+
+        const validName = result[0] === undefined
+        if(!validName){
+            res.status(404).send('User not found')
+        }
+        else{
+            res.json(result[0])
+        }
+    })
 })
 
 router.post("/modifySchedule", async (req,res)=>{

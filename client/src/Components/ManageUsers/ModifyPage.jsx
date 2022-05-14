@@ -20,10 +20,8 @@ export function ModifyPage() {
 
     const onSubmit = async(data) =>{
         try{
-            console.log(data);
-            axios.post('http://localhost:3001/users/updateByID',data).then((response) => {
+            axios.post('http://localhost:3001/users/updateUsers',data).then((response) => {})
             moveTo()
-            })
         }catch(err){
                 alert('Usuario invalido')
         }
@@ -56,7 +54,7 @@ export function ModifyPage() {
 
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Identificación</label>
-                                                <input type="text" className="form-control" value= {userInfo._id} {...register('_id',{required:true})}/>
+                                                <input type="text" className="form-control" value= {userInfo.ID} {...register('ID',{required:true})}/>
                                             </div>
 
                                             <div className="col">
@@ -81,6 +79,12 @@ export function ModifyPage() {
 
                                         <br></br>
                                         <div className="row">
+
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Correo institucional</label>
+                                                <input type="email" className="form-control"  value={userInfo.email} {...register('email',{required:true})}/>
+                                            </div>
+
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Correo alterno</label>
                                                 <input type="email" className="form-control"  placeholder={userInfo.altEmail} {...register('altEmail',{required:true})}/>

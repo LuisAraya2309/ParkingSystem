@@ -22,8 +22,8 @@ export  function CreateParking() {
           fetch('https://script.google.com/macros/s/AKfycbxpJthcQU0MinllxonsFDGw87shLcXGvM4I9rehsLeQd2Ti1oQ/exec', //your AppsScript URL
             { method: "POST", body: JSON.stringify(dataSend) }) //send to Api
             .then(res => res.json()).then((a) => {
-              console.log(a) //See response
-              contractInfo = a
+                alert('Documento almacenado con éxito')
+                contractInfo = a
             }).catch(e => console.log(e)) // Or Error in console
         }
       }
@@ -32,7 +32,7 @@ export  function CreateParking() {
 
     let navigate = useNavigate()
     const moveTo = () =>{
-      let path = '/AdminPage'
+      let path = '/ManageParking'
       navigate(path)
     }
 
@@ -41,9 +41,8 @@ export  function CreateParking() {
         const parkingInfo = parkingFactory.create(data,contractInfo)
         try{
             axios.post('http://localhost:3001/parkings/createParking',parkingInfo).then((response) => {
-            moveTo()
             })
-
+            moveTo()
         }catch(err){
             alert(err)
         }

@@ -47,6 +47,12 @@ export function SignUpForm() {
                 <div className="col">
                     <input type="text" className="form-control" placeholder="Identidad" aria-label="Identidad" {...register('ID',{required:true})}/>
                 </div>
+
+            </div>
+
+            <br></br>
+            <div className="row">
+
                 <div className="col">
                     <input type="password" className="form-control" placeholder="Contraseña" aria-label="Contraseña" {...register('password',{required:true})}/>
                 </div>
@@ -55,37 +61,32 @@ export function SignUpForm() {
                     <input type="email" className="form-control" placeholder="Correo institucional" aria-label="Correo institucional" {...register('email',{required:true})}/>
                 </div>
 
-            </div>
-
-            <br></br>
-            <div className="row">
                 <div className="col">
                     <input type="email" className="form-control" placeholder="Correo alterno" aria-label="Correo alterno" {...register('altEmail',{required:true})}/>
                 </div>
-                <div className="col">
-
-
-                <select className="form-select" defaultValue={'DEFAULT'} aria-label="Departamento" {...register('department',{required:true})}>
-                    <option value="DEFAULT" disabled>Departamento</option>
-                    {departmentsList.map((department) =>{
-                    return (
-                        <option key={department.code} value={department.code+ '-'+ department.name}>{department.code + '-'+ department.name}</option>
-                    );
-                    })}
-                </select>
                 
-                
-                </div>
-                <div className="col">
-                    <input type="text" className="form-control" placeholder="Teléfono" aria-label="Teléfono" {...register('phone',{required:true})}/>
-                </div>
-                <div className="col">
-                    <input type="text" className="form-control" placeholder="Placas" aria-label="Placas" {...register('vehicules',{required:true})}/>
-                </div>
                 
             </div>
 
-            
+            <div className="row">
+                <div className="col">
+                    <select className="form-select" defaultValue={'DEFAULT'} aria-label="Departamento" {...register('department',{required:true})}>
+                        <option value="DEFAULT" disabled>Departamento</option>
+                        {departmentsList.map((department) =>{
+                        return (
+                            <option key={department.code} value={department.code+ '-'+ department.name}>{department.code + '-'+ department.name}</option>
+                        );
+                        })}
+                    </select>
+                </div>
+                    <div className="col">
+                        <input type="text" className="form-control" placeholder="Teléfono" aria-label="Teléfono" {...register('phone',{required:true})}/>
+                    </div>
+                <div className="col">
+                    <input type="text" className="form-control" placeholder="Placas" aria-label="Placas" {...register('vehicules',{required:true})}/>
+                </div>
+            </div>
+
             <br></br>
             <center>
                 <button type="submit" className="btn btn-dark text-center">Registrar Usuario</button>    

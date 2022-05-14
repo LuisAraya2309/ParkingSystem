@@ -12,7 +12,7 @@ export function UsersList({props}) {
   let navigate = useNavigate()
   const moveTo = (userInformation) =>{
     let path
-    (props.action === 1) ? (path = '/ModifyPage') : (path = '/ManageUsers')
+    (props.action === 1) ? (path = '/ModifyPage') : (path = '/AdminPage')
     navigate(path, {state:{userInfo:userInformation}})
   }
   
@@ -27,8 +27,6 @@ export function UsersList({props}) {
             moveTo(response.data)
             })
           } 
-          
-          
       } catch(err){
           alert('Se produjo un error')
       }
@@ -43,7 +41,7 @@ export function UsersList({props}) {
   return (
     <Fragment>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <select className="form-select" defaultValue={'DEFAULT'} aria-label="Usuarios" {...register('username',{required:true})}>
+        <select className="form-select" defaultValue={'DEFAULT'} aria-label="Usuarios" {...register('email',{required:true})}>
           <option value="DEFAULT" disabled>Usuarios</option>
           {usersList.map((user) =>{
               return (

@@ -9,6 +9,7 @@ import parking from './Parking.js'
 const parkingFactory = new parking.ParkingFactory()
 var contractInfo 
 
+
 export function ModifyParking() {
 
     function guardarArchivo(e) {
@@ -23,7 +24,7 @@ export function ModifyParking() {
           fetch('https://script.google.com/macros/s/AKfycbxpJthcQU0MinllxonsFDGw87shLcXGvM4I9rehsLeQd2Ti1oQ/exec', //your AppsScript URL
             { method: "POST", body: JSON.stringify(dataSend) }) //send to Api
             .then(res => res.json()).then((a) => {
-              console.log(a) //See response
+              alert('Documento almacenado con éxito')
               contractInfo = a
             }).catch(e => console.log(e)) // Or Error in console
         }
@@ -45,8 +46,8 @@ export function ModifyParking() {
         console.log(parkingInfo)
         try{
             axios.post('http://localhost:3001/parkings/updateByName',parkingInfo).then((response) => {
-            moveTo()
             })
+            moveTo()
         }catch(err){
                 alert('Usuario invalido')
         }
@@ -152,7 +153,7 @@ export function ModifyParking() {
                                         <br></br>
 
                                         <center>
-                                            <button type="submit" className="btn btn-dark text-center">Modificar información</button>    
+                                            <button type="submit" className= "btn btn-dark text-center" >Modificar información</button>    
                                         </center>
                                         
                                     </form>

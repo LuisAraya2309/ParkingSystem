@@ -8,19 +8,17 @@ export function ConsultParking() {
     const {state} = useLocation();
     const parkingInfo = state.parkingInfo;
 
-    /*
-    if(parkingInfo['nonAvailability']){
-        parkingInfo['nonAvailability'] = 'Activo' 
-    }else{
-        parkingInfo['nonAvailability'] = 'Fuera de servicio' 
+    if(parkingInfo.nonAvailability === "false"){
+        parkingInfo.nonAvailability = "Fuera de funcionamiento"
+    }else if(parkingInfo.nonAvailability === "true"){
+        parkingInfo.nonAvailability = "Activo"
     }
 
-    if(!parkingInfo['schedule']['weekends_enabled']){
-        console.log( parkingInfo['schedule']['weekends_enabled'])
-        parkingInfo['schedule']['weekends_enabled'] = 'Activo' 
-    }else{
-        parkingInfo['schedule']['weekends_enabled'] = 'Fuera de servicio'
-    }*/
+    if(parkingInfo.schedule.weekends_enabled === "false"){
+        parkingInfo.schedule.weekends_enabled = "Fuera de funcionamiento"
+    }else if(parkingInfo.schedule.weekends_enabled === "true"){
+        parkingInfo.schedule.weekends_enabled = "Activo"
+    }
 
   return (
     <Fragment>
@@ -63,7 +61,7 @@ export function ConsultParking() {
 
                                         <div className="col">
                                             <label htmlFor="text" className="form-label">Fines de semana</label>
-                                            <input type="text" className="form-control" placeholder="FinesSemana" aria-label="FinesSemana" value = {parkingInfo.schedule.weekends_enabled} readOnly/>
+                                            <input type="text" className="form-control" placeholder="FinesSemana" aria-label="FinesSemana" value = {parkingInfo.schedule.weekends_enabled}readOnly/>
                                         </div>
                                         
                                     </div>

@@ -40,7 +40,7 @@ export function UserInformation() {
                             <center>
                               <form onSubmit={handleSubmit(onSubmit)}>
                                 <h1>{username}</h1>
-                                <input  type="text" id="username" required {...register('username',{required:true})}/>
+                                <input  type="text" id="username" required {...register('email',{required:true})}/>
                                 <br/>
                                 <input className="btn btn-dark text-center" type='submit' value='Consultar'/>
                               </form>

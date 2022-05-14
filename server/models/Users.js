@@ -2,10 +2,6 @@ const { default: mongoose } = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
     
-    _id:{
-        type:Number,
-        required:false,
-    },
     
     ID:{
         type:Number,
@@ -53,7 +49,7 @@ const UserSchema = new mongoose.Schema({
     },
 
     vehicles:{
-        type:String,
+        type:Array,
         required:false,
     },
 
