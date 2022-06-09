@@ -22,6 +22,8 @@ export function AdminPage() {
 
                         <PrincipalCard props={{title:"Módulo de Consultas",buttonTitle:"Realizar Consultas",redirectLink:"/QueriesPage"}} />
 
+                        <PrincipalCard props={{title:"Simulador de Expiracion",buttonTitle:"Iniciar Simulacion",redirectLink:"/Simulate"}} />
+
 
                     </div>
                     
