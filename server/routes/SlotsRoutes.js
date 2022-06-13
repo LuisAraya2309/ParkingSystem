@@ -4,19 +4,13 @@ const SlotsModel = require('../models/Slots')
 
 router.post("/createSlots", async (req,res) => {
 
-    SlotsModel.aggregate([{$match:{parkingName:{$eq:req.body.parkingName}}}],(err,result)=>{
-        const validParking = result[0] === undefined
-        if(validParking){
-            res.status(404).send('Parking not found')
-        }
-    });
     const newSlots = SlotsModel(req.body)
     newSlots.save()
 })
 
 router.post("/deleteSlotsByParking", async (req,res) => {
     
-    SlotsModel.deleteOne({parkingName:req.body.parkingName} , (err,result) =>{
+    SlotsModel.deleteOne({parkingName:req.body.name} , (err,result) =>{
         
         const validName = result[0] === undefined
         if(!validName){

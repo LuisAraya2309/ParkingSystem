@@ -23,7 +23,7 @@ const ParkingSchema = new mongoose.Schema({
     },
 
     slotsAvailable:{
-        type:Number,
+        type:Object,
         required:false,
     },
 

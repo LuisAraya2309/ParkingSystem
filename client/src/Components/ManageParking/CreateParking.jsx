@@ -38,10 +38,15 @@ export  function CreateParking() {
 
     const onSubmit = async(data) =>{
 
+        data['slotsAvailable'] = {'users':data.users, 'chief':data.chief, 'preferential':data.preferential, 'visitor':data.visitor ,'tecVehicle':data.tecVehicles}
         const parkingInfo = parkingFactory.create(data,contractInfo)
+
+        const slotsInfo = {'userSlot':{'totalAmount':data.users},'chiefSlot':{'totalAmount':data.chief},'preferentialSlot':{'totalAmount':data.preferential},
+        'tecVehicleSlot':{'totalAmount':data.tecVehicles},'parkingName':data.name,'visitorSlot':{'totalAmount':data.visitor}};
+
         try{
-            axios.post('http://localhost:3001/parkings/createParking',parkingInfo).then((response) => {
-            })
+            axios.post('http://localhost:3001/parkings/createParking',parkingInfo).then((response) => {})
+            axios.post('http://localhost:3001/slots/createSlots',slotsInfo).then((response) => {})
             moveTo()
         }catch(err){
             alert(err)
@@ -85,7 +90,7 @@ export  function CreateParking() {
                                             </div>
 
                                         </div>
-                                        <br></br>
+                                      
 
                                         <div className="row">
                                             <div className="col">
@@ -108,13 +113,36 @@ export  function CreateParking() {
                                         </div>
 
                                         <br></br>
+
                                         <div className="row">
                                             
                                             <div className="col">
-                                                <label htmlFor="text" className="form-label">Espacios disponibles</label>
-                                                <input type="text" className="form-control" placeholder="Espacios disponibles" aria-label="Espacios disponibles"  {...register('slotsAvailable',{required:true})}/>
+                                                <label htmlFor="text" className="form-label">Usuarios</label>
+                                                <input type="Number" className="form-control" placeholder="Espacios disponibles" aria-label="Espacios disponibles"  {...register('users',{required:true})}/>
                                             </div>
 
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Jefatura</label>
+                                                <input type="Number" className="form-control" placeholder="Espacios disponibles" aria-label="Espacios disponibles"  {...register('chief',{required:true})}/>
+                                            </div>
+
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Preferencial</label>
+                                                <input type="Number" className="form-control" placeholder="Espacios disponibles" aria-label="Espacios disponibles"  {...register('preferential',{required:true})}/>
+                                            </div>
+
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Visitantes</label>
+                                                <input type="Number" className="form-control" placeholder="Espacios disponibles" aria-label="Espacios disponibles"  {...register('visitor',{required:true})}/>
+                                            </div>
+
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Vehic. TEC</label>
+                                                <input type="Number" className="form-control" placeholder="Espacios disponibles" aria-label="Espacios disponibles"  {...register('tecVehicles',{required:true})}/>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">                           
 
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Estado</label>
@@ -133,7 +161,7 @@ export  function CreateParking() {
                                         </div>
 
                                         <br></br>
-
+                                        
                                         <center>
                                             <button type="submit" className="btn btn-dark text-center">Ingresar información</button>  
                                         </center>

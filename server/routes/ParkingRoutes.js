@@ -15,9 +15,7 @@ router.post("/createParking", async (req,res) => {
             res.status(404).send()
         }
     });
-    console.log(newParking)
     const newValidParking = ParkingModel(newParking)
-    console.log(newValidParking)
     newValidParking.save()
 })
 
@@ -38,7 +36,7 @@ router.post("/deleteParkingByName", async (req,res) => {
 router.post("/updateByName", async (req,res) => {
 
     const setAttributes = {name: req.body.parkingInfo.name, type: req.body.parkingInfo.type, location: req.body.parkingInfo.location, schedule:req.body.parkingInfo.schedule,
-        slotsAvailable: req.body.parkingInfo.slotsAvailable, nonAvailability:req.body.parkingInfo.nonAvailability, contract:req.body.parkingInfo.contract};
+    slotsAvailable: req.body.parkingInfo.slotsAvailable, nonAvailability:req.body.parkingInfo.nonAvailability, contract:req.body.parkingInfo.contract};
 
     ParkingModel.updateOne({name:req.body.nameOrg},{$set:setAttributes},(err,result) =>{
 
@@ -104,7 +102,6 @@ router.post("/getParkingBySchedule", async (req,res) => {
             res.status(404).send('Parking invalid')
         }
         else{
-            console.log('funciona')
             res.json(result[0])
         }
     })

@@ -12,7 +12,7 @@ const SlotsSchema = new mongoose.Schema({
         required:false,
     },
 
-    preferencialSlot:{
+    preferentialSlot:{
         type:Object,
         required:false,
     },

@@ -26,7 +26,7 @@ import { FunctionaryReport } from './FunctionaryReport/FunctionaryReport';
 import { ManageParkingPage } from './ManageParking/ManageParkingPage';
 import { ReportsPage } from './ScheduleReports/ReportsPage';
 import { RegisteredParkings } from './RegisteredParkings/RegisteredParkings';
-
+import { BookingPage } from './ManageBooking/BookingPage';
 
 export function App() {
   return (
@@ -73,6 +73,8 @@ export function App() {
                   <Route exact path="/ScheduleReports" element={<ReportsPage />}/>
 
                   <Route exact path="/RegisteredParkings" element={<RegisteredParkings />}/>
+
+                  <Route exact path="/BookingPage" element={<BookingPage />}/>
 
               </Routes>
                 

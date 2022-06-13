@@ -42,6 +42,7 @@ export function ModifyParking() {
 
     const onSubmit = async(data) =>{
 
+        data['slotsAvailable'] = {'users':data.users, 'chief':data.chief, 'preferential':data.preferential, 'visitor':data.visitor ,'tecVehicle':data.tecVehicles}
         const parkingInfo = {"parkingInfo":parkingFactory.create(data,contractInfo),"nameOrg":data.nameOrg}
         console.log(parkingInfo)
         try{
@@ -78,7 +79,7 @@ export function ModifyParking() {
                                             
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Nombre</label>
-                                                <input type="text" className="form-control" placeholder = {parkingInfo.name} {...register('name',{required:true})}/>
+                                                <input type="text" className="form-control" defaultValue = {parkingInfo.name} {...register('name',{required:true})}/>
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Tipo de parqueo</label>
@@ -92,13 +93,12 @@ export function ModifyParking() {
                                             </div>
 
                                         </div>
-                                        <br></br>
 
                                         <div className="row">
 
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Ubicación</label>
-                                                <textarea type="text" style={{resize:'none'}} className="form-control" placeholder = {parkingInfo.location} {...register('location',{required:true})}/>
+                                                <textarea type="text" style={{resize:'none'}} className="form-control" defaultValue = {parkingInfo.location} {...register('location',{required:true})}/>
                                             </div>
 
                                             <div className="col">
@@ -115,8 +115,37 @@ export function ModifyParking() {
                                         </div>
 
                                         <br></br>
+
                                         <div className="row">
                                             
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Usuarios</label>
+                                                <input type="Number" className="form-control" placeholder="Espacios disponibles" defaultValue= {parkingInfo.slotsAvailable.users} {...register('users',{required:true})}/>
+                                            </div>
+
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Jefatura</label>
+                                                <input type="Number" className="form-control" placeholder="Espacios disponibles" defaultValue= {parkingInfo.slotsAvailable.chief}  {...register('chief',{required:true})}/>
+                                            </div>
+
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Preferencial</label>
+                                                <input type="Number" className="form-control" placeholder="Espacios disponibles" defaultValue= {parkingInfo.slotsAvailable.preferential}  {...register('preferential',{required:true})}/>
+                                            </div>
+
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Visitantes</label>
+                                                <input type="Number" className="form-control" placeholder="Espacios disponibles" defaultValue= {parkingInfo.slotsAvailable.visitor}  {...register('visitor',{required:true})}/>
+                                            </div>
+
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Vehic. TEC</label>
+                                                <input type="Number" className="form-control" placeholder="Espacios disponibles" defaultValue= {parkingInfo.slotsAvailable.tecVehicle}  {...register('tecVehicles',{required:true})}/>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Fines de semana</label>
                                                 <select className="form-select" defaultValue={'DEFAULT'} aria-label="Fines de semana" {...register('weekends_enabled',{required:true})} >
@@ -126,15 +155,6 @@ export function ModifyParking() {
                                                 </select>
                                             </div>
 
-                                            <div className="col">
-                                                <label htmlFor="text" className="form-label">Espacios disponibles</label>
-                                                <input type="text" className="form-control" placeholder= {parkingInfo.slotsAvailable} {...register('slotsAvailable',{required:true})}/>
-                                            </div>
-
-
-                                        </div>
-                                        <br></br>
-                                        <div className="row">
                                             <div className="col">
                                                     <label htmlFor="text" className="form-label">Estado</label>
                                                     <select className="form-select" defaultValue={'DEFAULT'} aria-label="estadoParqueo" {...register('nonAvailability',{required:true})} >

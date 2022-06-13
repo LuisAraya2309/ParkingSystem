@@ -16,11 +16,13 @@ export function ParkingList({props}) {
             path = "/AdminPage"
         }else if(props.action === 'Consultar'){
             path = "/ConsultParking"
-        }else{
+        }else if(props.action === 'Actualizar'){
             path = "/ModifyParking"
+        }else{
+            path = "/BookingPage"
         }
 
-        navigate(path, {state:{parkingInfo:parkingInfo}})
+        navigate(path, {state:{parkingInfo:parkingInfo, userLogged:props.userLogged}})
     }
     
     useEffect(() => {
@@ -33,6 +35,7 @@ export function ParkingList({props}) {
     const onSubmit = async(data) =>{
         try{
             if(props.action === 'Eliminar'){
+                axios.post('http://localhost:3001/slots/deleteSlotsByParking',data).then((response) => {})
                 axios.post('http://localhost:3001/parkings/deleteParkingByName',data).then((response) => {
                 moveTo(response.data)
                 })
@@ -46,8 +49,6 @@ export function ParkingList({props}) {
             alert('Se produjo un error')
         }
     }
-
-
 
   return (
     <Fragment>

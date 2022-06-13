@@ -2,7 +2,6 @@ const router = require('express').Router();
 const BookingModel = require('../models/Bookings')
 
 router.post("/createBooking", async (req,res) => {
-
     const newSlots = BookingModel(req.body)
     newSlots.save()
 })
