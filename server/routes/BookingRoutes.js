@@ -2,6 +2,7 @@ const router = require('express').Router();
 const BookingModel = require('../models/Bookings')
 
 router.post("/createBooking", async (req,res) => {
+    console.log(req.body);
     const newSlots = BookingModel(req.body)
     newSlots.save()
 })
@@ -38,7 +39,7 @@ router.post("/updateByParking", async (req,res) => {
 })*/
 
 router.post("/getBookingsByParking" , async (req,res) => {
-    BookingModel.aggregate([{$match:{parkingName:{$eq:req.body.parkingName}, expired:{$eq:true}}}], (err,result) =>{
+    BookingModel.aggregate([{$match:{parkingName:{$eq:req.body.parkingName}, expired:{$eq:false}}}], (err,result) =>{
         if (err){
             res.status(404).send('Parking invalid')
         }
@@ -53,7 +54,7 @@ router.post("/getBookingsByParking" , async (req,res) => {
 
 router.get("/getBookings",(req,res) => {
     
-    BookingModel.aggregate([{$match:{expired:{$eq:true}}}], (err,result) =>{
+    BookingModel.aggregate([{$match:{expired:{$eq:false}}}], (err,result) =>{
         if (err){
             res.status(404).send('Expired booking')
         }

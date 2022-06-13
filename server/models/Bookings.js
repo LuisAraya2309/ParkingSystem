@@ -13,7 +13,7 @@ const BookingSchema = new mongoose.Schema({
     },
 
     vehicle:{
-        type:Number,
+        type:String,
         required:false,
     },
 
