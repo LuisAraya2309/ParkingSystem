@@ -48,6 +48,17 @@ export function SignUpForm() {
                     <input type="text" className="form-control" placeholder="Identidad" aria-label="Identidad" {...register('ID',{required:true})}/>
                 </div>
 
+                <div className="col">
+                    <select className="form-select" defaultValue={'DEFAULT'} aria-label="TipoUsuario" {...register('type',{required:true})} >
+                        <option value="DEFAULT" disabled>Tipo de usuario</option>
+                        <option key= "1" value="User" >Usuario TEC</option>
+                        <option key= "2" value="Chief" >Jefatura</option>
+                        <option key= "3" value="Preferential" >Usuario preferencial</option>
+                        <option key= "4" value="TecDriver" >Conductor oficial</option>
+                        <option key= "5" value="Visitor" >Visitante</option>
+                    </select>
+                </div>
+
             </div>
 
             <br></br>
@@ -67,7 +78,7 @@ export function SignUpForm() {
                 
                 
             </div>
-
+            <br></br>
             <div className="row">
                 <div className="col">
                     <select className="form-select" defaultValue={'DEFAULT'} aria-label="Departamento" {...register('department',{required:true})}>

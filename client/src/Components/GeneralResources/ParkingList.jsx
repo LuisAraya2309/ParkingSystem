@@ -25,7 +25,7 @@ export function ParkingList({props}) {
             path = "/BookingPage"
         }
 
-        navigate(path, {state:{parkingInfo:parkingInfo, userLogged:props.userLogged}})
+        navigate(path, {state:{parkingInfo:parkingInfo, userLogged:props.userLogged, userType: props.userType}})
     }
     
     useEffect(() => {
