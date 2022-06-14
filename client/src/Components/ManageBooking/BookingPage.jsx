@@ -8,19 +8,23 @@ import {notAvailableSlots, AvailableList} from './AuxiliarFunctions'
 
 export function BookingPage() {
 
+    const typesDicc = {'User':'userSlot','Chief':'chiefSlot','Preferential':'preferentialSlot','TecDriver':'tecVehicleSlot', 'Visitor':'visitorSlot'}
     const {register,handleSubmit} = useForm();
     const {state} = useLocation();
     const parkingInfo = state.parkingInfo;
     const [userInfo,setUser] = useState([]);
     const [vehicleList,setVehicleList] = useState([]);
     const [bookingList,setbookingList] = useState([]);
+    const [slotsInfo,setSlots] = useState([]);
+
+    const userType = state.userType;
     const email = state.userLogged;
     const slotsSelect = document.getElementById('slotsSelect');
 
-    let navigate = useNavigate()
+    let navigate = useNavigate();
     const moveTo = () =>{
-      let path = '/ClientPage'
-      navigate(path, {state:{user:userInfo.email}})
+      let path = '/ClientPage';
+      navigate(path, {state:{user:userInfo.email, userType:userType}});
     }
 
     const agregar = (slotsAvailableMapList) => {
@@ -29,7 +33,6 @@ export function BookingPage() {
             const option = document.createElement('option');
             option.value = slotsAvailableMapList[slot];
             option.text = slotsAvailableMapList[slot];
-            //register('slotSelected',{required:true})
             slotsSelect.appendChild(option);
         }
       };
@@ -37,8 +40,9 @@ export function BookingPage() {
     const onSubmit = async(data) =>{
 
         try{
+            const userSlots = slotsInfo[typesDicc[userType]];
             const notAvailable = notAvailableSlots(bookingList,data.start_hour,data.finish_hour)
-            const slotsAvailableMapList = AvailableList(notAvailable,30,"u")
+            const slotsAvailableMapList = AvailableList(notAvailable, userSlots.totalAmount, userType)
             agregar(slotsAvailableMapList);
             alert("Busqueda realizada con exito")
             
@@ -52,7 +56,8 @@ export function BookingPage() {
         try{
             const newSlot = document.getElementById('slotsSelect'); const slotId = newSlot.value;
             const schedule = data.start_hour + " - " + data.finish_hour;
-            const bookingObject = {'parkingName': data.parkingName, 'slotId': slotId ,'userId': userInfo.id, 'vehicle': data.vehicle, 'schedule': schedule, expired:false }
+            console.log(userInfo.id);
+            const bookingObject = {'parkingName': data.parkingName, 'slotId': slotId ,'userId': userInfo.ID, 'vehicle': data.vehicle, 'schedule': schedule, expired:false }
             axios.post('http://localhost:3001/bookings/createBooking',bookingObject).then((response) => {})
             moveTo();
 
@@ -60,9 +65,6 @@ export function BookingPage() {
             alert(err)
         }
     }
-
-    
-
 
     useEffect(() => {
 
@@ -73,6 +75,10 @@ export function BookingPage() {
 
         axios.post('http://localhost:3001/bookings/getBookingsByParking',{'parkingName':parkingInfo.name}).then((response) => {
             setbookingList(response.data)
+        })
+
+        axios.post('http://localhost:3001/slots/getSlotsByParking',{'parkingName':parkingInfo.name}).then((response) => {
+            setSlots(response.data)
         })
 
         // eslint-disable-next-line
@@ -109,15 +115,12 @@ export function BookingPage() {
                                                         
                                                         );
                                                 })}
-                                                </select>                                                                
-                                                
+                                                </select>                                                                                                               
                                             </div>
-                                        
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Parqueo</label>
                                                 <input type="text" className="form-control" defaultValue = {parkingInfo.name} {...register('parkingName',{required:false})} readOnly/>
                                             </div>
-
                                         </div>                                     
                                         <br></br>
                                         <div className="row">
@@ -161,7 +164,7 @@ export function BookingPage() {
                                                 </div>
                                                 <div className="modal-footer">
                                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                    <button type = "submit" className="btn btn-dark text-center" >Seleccionar</button>
+                                                    <button type = "submit" className="btn btn-dark text-center" data-bs-dismiss="modal" >Seleccionar</button>
                                                 </div>
                                                 </div>
                                             </div>

@@ -61,7 +61,6 @@ router.post("/createUser", async (req,res) => {
             res.status(404).send()
         }
     });
-    newUser['type'] = "client"
     newUser['vehicles'] = []
     newUser['schedule'] = {}
     const newValidUser = UserModel(newUser)

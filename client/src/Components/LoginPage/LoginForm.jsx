@@ -9,8 +9,8 @@ export  function LoginForm() {
     let navigate = useNavigate()
     const loggedIn = (userLogged,userType) =>{
         let adminPath
-        (userType==='client') ? (adminPath='/ClientPage') : (adminPath='/AdminPage') 
-        navigate(adminPath,{state:{user:userLogged}})
+        (userType==='Admin') ? (adminPath='/AdminPage') : (adminPath='/ClientPage') 
+        navigate(adminPath,{state:{user:userLogged, userType: userType}})
     }
 
 

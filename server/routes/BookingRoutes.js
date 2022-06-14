@@ -39,6 +39,7 @@ router.post("/updateByParking", async (req,res) => {
 })*/
 
 router.post("/getBookingsByParking" , async (req,res) => {
+    console.log(req.body.parkingName);
     BookingModel.aggregate([{$match:{parkingName:{$eq:req.body.parkingName}, expired:{$eq:false}}}], (err,result) =>{
         if (err){
             res.status(404).send('Parking invalid')

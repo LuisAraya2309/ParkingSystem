@@ -12,6 +12,11 @@ const BookingSchema = new mongoose.Schema({
         required:false,
     },
 
+    userId:{
+        type:Number,
+        required:false,
+    },
+
     vehicle:{
         type:String,
         required:false,

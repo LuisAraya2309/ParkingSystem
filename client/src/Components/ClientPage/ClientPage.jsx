@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 export function ClientPage() {
   const {state} = useLocation();
   const userLogged = state.user
-  
+  const userType  = state.userType
   
 
   return (
@@ -21,7 +21,7 @@ export function ClientPage() {
                             
                             <PrincipalCard props={{title:"Consultas",buttonTitle:"Realizar Consulta",redirectLink:"/CustumerInquieries"}} />
     
-                            <MangParkingForm props={{title:"Reservar Parqueo",buttonTitle:"Realizar reserva", action:"BookingPage", userLogged:userLogged}} />
+                            <MangParkingForm props={{title:"Reservar Parqueo",buttonTitle:"Realizar reserva", action:"BookingPage", userLogged:userLogged, userType}} />
     
                             <PrincipalCard props={{title:"Modificar Horario",buttonTitle:"Modificar",redirectLink:"/ClientSchedule",params:userLogged}} />
                            
