@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { PrincipalCard } from '../GeneralResources/PrincipalCard'
+import { MangParkingForm } from '../ManageParking/MangParkingForm'
 
 export function QueriesPage() {
   return (
@@ -19,7 +20,9 @@ export function QueriesPage() {
                         <PrincipalCard props={{title:"Franja Horaria",buttonTitle:"Realizar Consulta",redirectLink:"/ScheduleReports"}} />
                        
                         <PrincipalCard props={{title:"Consultar información de un usuario",buttonTitle:"Realizar Consulta",redirectLink:"/UserInformation"}} />
- 
+
+                        <MangParkingForm props={{title:"Estadísticas de un Parqueo",buttonTitle:"Ver", action:"EstadisticasParqueo"}} />
+
                     </div>
                     
                     

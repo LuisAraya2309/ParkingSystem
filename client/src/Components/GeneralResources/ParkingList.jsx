@@ -18,7 +18,10 @@ export function ParkingList({props}) {
             path = "/ConsultParking"
         }else if(props.action === 'Actualizar'){
             path = "/ModifyParking"
-        }else{
+        }else if(props.action === 'EstadisticasParqueo'){
+            path = "/ParkingMetrics"
+        }
+        else{
             path = "/BookingPage"
         }
 
@@ -39,7 +42,10 @@ export function ParkingList({props}) {
                 axios.post('http://localhost:3001/parkings/deleteParkingByName',data).then((response) => {
                 moveTo(response.data)
                 })
-            }else{
+            }else if(props.action === 'EstadisticasParqueo'){
+                moveTo(data)
+            }
+            else{
                 axios.post('http://localhost:3001/parkings/getParkingByName',data).then((response) => {
                 moveTo(response.data)
                 })

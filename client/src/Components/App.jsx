@@ -27,6 +27,9 @@ import { ManageParkingPage } from './ManageParking/ManageParkingPage';
 import { ReportsPage } from './ScheduleReports/ReportsPage';
 import { RegisteredParkings } from './RegisteredParkings/RegisteredParkings';
 import { BookingPage } from './ManageBooking/BookingPage';
+import { ParkingMetrics } from './QueriesModule/ParkingMetrics';
+import { MetricsByType } from './QueriesModule/MetricsByType';
+import { MetricsByDepartment } from './QueriesModule/MetricsByDepartment';
 
 export function App() {
   return (
@@ -76,6 +79,11 @@ export function App() {
 
                   <Route exact path="/BookingPage" element={<BookingPage />}/>
 
+                  <Route exact path="/ParkingMetrics" element={<ParkingMetrics />}/>
+
+                  <Route exact path="/MetricsByType" element={<MetricsByType />}/>
+
+                  <Route exact path="/MetricsByDepartment" element={<MetricsByDepartment />}/>
               </Routes>
                 
             </div>
