@@ -41,6 +41,7 @@ export function BookingPage() {
 
         try{
             const userSlots = slotsInfo[typesDicc[userType]];
+            console.log(typesDicc[userType]);
             const notAvailable = notAvailableSlots(bookingList,data.start_hour,data.finish_hour)
             const slotsAvailableMapList = AvailableList(notAvailable, userSlots.totalAmount, userType)
             agregar(slotsAvailableMapList);
@@ -56,7 +57,6 @@ export function BookingPage() {
         try{
             const newSlot = document.getElementById('slotsSelect'); const slotId = newSlot.value;
             const schedule = data.start_hour + " - " + data.finish_hour;
-            console.log(userInfo.id);
             const bookingObject = {'parkingName': data.parkingName, 'slotId': slotId ,'userId': userInfo.ID, 'vehicle': data.vehicle, 'schedule': schedule, expired:false }
             axios.post('http://localhost:3001/bookings/createBooking',bookingObject).then((response) => {})
             moveTo();

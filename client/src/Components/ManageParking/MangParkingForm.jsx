@@ -10,7 +10,7 @@ export function MangParkingForm({props}) {
                     <div className="card-body">
                         <h2 className="card-title">{props.title}</h2>
                         <p className="card-text">{props.body ? props.text : ""}</p>
-                        <ParkingList props={{action:props.action, buttonTitle:props.buttonTitle, userLogged: props.userLogged}} />
+                        <ParkingList props={{action:props.action, buttonTitle:props.buttonTitle, userLogged: props.userLogged, userType: props.userType}} />
                     </div>                                                       
                 </div>
             </div>
