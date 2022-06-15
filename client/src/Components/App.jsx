@@ -30,6 +30,7 @@ import { BookingPage } from './ManageBooking/BookingPage';
 import { ParkingMetrics } from './QueriesModule/ParkingMetrics';
 import { MetricsByType } from './QueriesModule/MetricsByType';
 import { MetricsByDepartment } from './QueriesModule/MetricsByDepartment';
+import { ByDepartmentsMetrics } from './QueriesModule/ByDepartmentsMetrics';
 
 export function App() {
   return (
@@ -84,6 +85,9 @@ export function App() {
                   <Route exact path="/MetricsByType" element={<MetricsByType />}/>
 
                   <Route exact path="/MetricsByDepartment" element={<MetricsByDepartment />}/>
+
+                  <Route exact path="/ByDepartment" element={<ByDepartmentsMetrics />}/>
+
               </Routes>
                 
             </div>

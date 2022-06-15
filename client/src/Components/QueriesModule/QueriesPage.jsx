@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import { DepartmentForm } from '../GeneralResources/DepartmentForm'
 import { PrincipalCard } from '../GeneralResources/PrincipalCard'
 import { MangParkingForm } from '../ManageParking/MangParkingForm'
 
@@ -22,6 +23,9 @@ export function QueriesPage() {
                         <PrincipalCard props={{title:"Consultar información de un usuario",buttonTitle:"Realizar Consulta",redirectLink:"/UserInformation"}} />
 
                         <MangParkingForm props={{title:"Estadísticas de un Parqueo",buttonTitle:"Ver", action:"EstadisticasParqueo"}} />
+
+                        <DepartmentForm props={{title:"Estadísticas por un Departamento",buttonTitle:"Ver", action:"ParkingMetricByDepartment"}} />
+
 
                     </div>
                     

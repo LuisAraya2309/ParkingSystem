@@ -89,6 +89,41 @@ router.post("/bookingBySlotType" , async (req,res) => {
     
 })
 
+const getDepartment = async (userId) =>{
+
+    let userFound = await UserModel.find({ID:userId})
+    return (userFound[0].department)
+
+}
+
+router.post("/parkingsByDeparment" , async (req,res) => {
+    const departmentSplitted = req.body.departmentName.split(' ')
+    const departmentFilter = departmentSplitted[0][0] + departmentSplitted[2][0] + departmentSplitted[4][0]
+    
+    
+    let bookings = await BookingModel.find({})
+    let parkingsUsage = {}
+    
+    for(const booking of bookings){
+        let bookingDepartment = await UserModel.find({ID:booking.userId})
+        bookingDepartment = bookingDepartment[0].department
+        if(bookingDepartment === departmentFilter){
+            parkingsUsage[booking.parkingName] === undefined ? parkingsUsage[booking.parkingName] = 1 : parkingsUsage[booking.parkingName]++;
+            
+        }
+    }
+    const parkingsToAnalyze = Object.keys(parkingsUsage)
+    let percentageByParking = {}
+    for(let parking of parkingsToAnalyze){
+        let bookingsPerParking = await BookingModel.aggregate([{$match:{parkingName:{$eq:parking}, expired:{$eq:false}}}])
+        percentageByParking[parking] = (parkingsUsage[parking]*100) / bookingsPerParking.length 
+    }
+    res.json(percentageByParking)
+
+    
+})  
+
+
 module.exports = router;
 
 
