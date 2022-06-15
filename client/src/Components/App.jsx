@@ -30,6 +30,10 @@ import { ManageParkingPage } from './ManageParking/ManageParkingPage';
 import { ReportsPage } from './ScheduleReports/ReportsPage';
 import { RegisteredParkings } from './RegisteredParkings/RegisteredParkings';
 import { BookingPage } from './ManageBooking/BookingPage';
+import { ParkingMetrics } from './QueriesModule/ParkingMetrics';
+import { MetricsByType } from './QueriesModule/MetricsByType';
+import { MetricsByDepartment } from './QueriesModule/MetricsByDepartment';
+import { ByDepartmentsMetrics } from './QueriesModule/ByDepartmentsMetrics';
 import { VisitorBookingPage } from './ManageBooking/VisitorBookingPage';
 import { ChiefBookingPage } from './ManageBooking/ChiefBookingPage';
 import { TecDriverBookingPage } from './ManageBooking/TecDriverBookingPage';
@@ -87,6 +91,14 @@ export function App() {
                   <Route exact path="/RegisteredParkings" element={<RegisteredParkings />}/>
 
                   <Route exact path="/BookingPage" element={<BookingPage />}/>
+
+                  <Route exact path="/ParkingMetrics" element={<ParkingMetrics />}/>
+
+                  <Route exact path="/MetricsByType" element={<MetricsByType />}/>
+
+                  <Route exact path="/MetricsByDepartment" element={<MetricsByDepartment />}/>
+
+                  <Route exact path="/ByDepartment" element={<ByDepartmentsMetrics />}/>
 
                   <Route exact path="/VisitorBookingPage" element={<VisitorBookingPage />}/>
 

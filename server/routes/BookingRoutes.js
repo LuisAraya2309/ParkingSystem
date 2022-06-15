@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const BookingModel = require('../models/Bookings')
+const UserModel = require('../models/Users')
 
 router.post("/createBooking", async (req,res) => {
     const newSlots = BookingModel(req.body)
@@ -64,5 +65,62 @@ router.get("/getBookings",(req,res) => {
         }
     })
 })
+    
+
+router.post("/bookingBySlotType" , async (req,res) => {
+
+    let bookings = await BookingModel.aggregate([{$match:{parkingName:{$eq:req.body.parkingName}, expired:{$eq:false}}}])
+    let perSlotType = {userSlot: 0, chiefSlot : 0,preferentialSlot : 0, tecVehicleSlot : 0, visitorSlot : 0}
+    const slotsTypes = {U:'userSlot',C:'chiefSlot',P:'preferentialSlot',T:'tecVehicleSlot',V:'visitorSlot'}
+    let perDepartment = {}
+
+    for (const booking of bookings){
+        let slotType = booking.slotId[0]    
+        let user = await UserModel.aggregate([{$match:{ID:booking.userId}}])
+        let department = user[0]['department']
+        perDepartment[department] === undefined ? perDepartment[department] = 1 : perDepartment[department]++
+        perSlotType[slotsTypes[slotType]]++;
+    }
+
+    res.json({perDepartment:perDepartment, perSlotType:perSlotType})
+    
+})
+
+const getDepartment = async (userId) =>{
+
+    let userFound = await UserModel.find({ID:userId})
+    return (userFound[0].department)
+
+}
+
+router.post("/parkingsByDeparment" , async (req,res) => {
+    const departmentSplitted = req.body.departmentName.split(' ')
+    const departmentFilter = departmentSplitted[0][0] + departmentSplitted[2][0] + departmentSplitted[4][0]
+    
+    
+    let bookings = await BookingModel.find({})
+    let parkingsUsage = {}
+    
+    for(const booking of bookings){
+        let bookingDepartment = await UserModel.find({ID:booking.userId})
+        bookingDepartment = bookingDepartment[0].department
+        if(bookingDepartment === departmentFilter){
+            parkingsUsage[booking.parkingName] === undefined ? parkingsUsage[booking.parkingName] = 1 : parkingsUsage[booking.parkingName]++;
+            
+        }
+    }
+    const parkingsToAnalyze = Object.keys(parkingsUsage)
+    let percentageByParking = {}
+    for(let parking of parkingsToAnalyze){
+        let bookingsPerParking = await BookingModel.aggregate([{$match:{parkingName:{$eq:parking}, expired:{$eq:false}}}])
+        percentageByParking[parking] = (parkingsUsage[parking]*100) / bookingsPerParking.length 
+    }
+    res.json(percentageByParking)
+
+    
+})  
+
 
 module.exports = router;
+
+
