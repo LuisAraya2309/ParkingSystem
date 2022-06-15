@@ -24,11 +24,9 @@ export function ParkingList({props}) {
             path = "/ChiefBookingPage"
         }else if(props.action === 'ReservarVehiculoTec'){
             path = "/TecDriverBookingPage"
-        }else{
         }else if(props.action === 'EstadisticasParqueo'){
             path = "/ParkingMetrics"
-        }
-        else{
+        }else{
             path = "/BookingPage"
         }
 
