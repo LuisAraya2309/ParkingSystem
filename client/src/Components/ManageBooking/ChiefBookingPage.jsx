@@ -4,9 +4,9 @@ import {useForm} from 'react-hook-form';
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
 import { useLocation } from 'react-router-dom';
-import {notAvailableSlots, AvailableList} from './AuxiliarFunctions'
+import {AvailableList, notAvailableChiefList} from './AuxiliarFunctions'
 
-export function BookingPage() {
+export function ChiefBookingPage() {
 
     const typesDicc = {'User':'userSlot','Chief':'chiefSlot','Preferential':'preferentialSlot','TecDriver':'tecVehicleSlot', 'Visitor':'visitorSlot'}
     const {register,handleSubmit} = useForm();
@@ -25,7 +25,7 @@ export function BookingPage() {
 
     let navigate = useNavigate();
     const moveTo = () =>{
-      let path = '/ClientPage';
+      let path = '/ChiefPage';
       navigate(path, {state:{user:userInfo.email, userType:userType}});
     }
 
@@ -43,8 +43,8 @@ export function BookingPage() {
 
         try{
             const userSlots = userInfo.discapacity === true ? slotsInfo['preferentialSlot'] : slotsInfo[typesDicc[userType]];
-            const notAvailable = notAvailableSlots(bookingList,data.start_hour,data.finish_hour)
-            const slotsAvailableMapList = AvailableList(notAvailable, userSlots.totalAmount, userInfo.discapacity === true ? 'Preferential': userType)
+            const notAvailableList = notAvailableChiefList(bookingList)
+            const slotsAvailableMapList = AvailableList(notAvailableList, userSlots.totalAmount, userInfo.discapacity === true ? 'Preferential': userType)
             agregar(slotsAvailableMapList);
             alert("Busqueda realizada con exito")
             
@@ -57,8 +57,7 @@ export function BookingPage() {
 
         try{
             const newSlot = document.getElementById('slotsSelect'); const slotId = newSlot.value;
-            const schedule = data.start_hour + " - " + data.finish_hour;
-            const bookingObject = {'parkingName': data.parkingName, 'slotId': slotId ,'userId': userInfo.ID, 'vehicle': data.vehicle, 'schedule': schedule,'date': date , 'expired':false}
+            const bookingObject = {'parkingName': data.parkingName, 'slotId': slotId ,'userId': userInfo.ID, 'vehicle': data.vehicle, 'date': date , 'expired':false}
             axios.post('http://localhost:3001/bookings/createBooking',bookingObject).then((response) => {})
             moveTo();
 
@@ -124,32 +123,13 @@ export function BookingPage() {
                                             </div>
                                         </div>                                     
                                         <br></br>
-                                        <div className="row">
-
-                                        
-                                            <div className="col">
-                                                <label htmlFor="text" className="form-label">Hora inicio</label>
-                                                <input type="time" className="form-control" min = {parkingInfo.schedule.opening_hour} max = {parkingInfo.schedule.closing_time} {...register('start_hour',{required:true})}/>
-                                            </div>
-
-                                            <div className="col">
-                                                <label htmlFor="text" className="form-label">Hora fin</label>
-                                                <input type="time" className="form-control" min = {parkingInfo.schedule.opening_hour} max = {parkingInfo.schedule.closing_time} {...register('finish_hour',{required:true})}/>
-                                            </div>
-
-                                            <div className="col">
-                                                <br></br>
-                                                <button type="submit" className="btn btn-dark text-center">Buscar espacios</button>  
-                                            </div>
-   
-                                        </div>
-                                        <br></br>
                                         
                                         <center>
-                                            <button type="button" className="btn btn-dark text-center" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Consultar espacios disponibles</button>  
+                                            <button type="submit" className="btn btn-dark text-center" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Consultar espacios disponibles</button>  
                                         </center>
 
                                     </form>
+
                                     <form onSubmit={handleSubmit(onSubmitSelect)} >
                                         <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                             <div className="modal-dialog">

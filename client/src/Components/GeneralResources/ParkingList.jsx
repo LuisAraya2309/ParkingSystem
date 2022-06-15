@@ -11,13 +11,19 @@ export function ParkingList({props}) {
 
     let navigate = useNavigate()
     const moveTo = (parkingInfo) =>{
-        let path 
+        let path;
         if(props.action === 'Eliminar'){
             path = "/AdminPage"
         }else if(props.action === 'Consultar'){
             path = "/ConsultParking"
         }else if(props.action === 'Actualizar'){
             path = "/ModifyParking"
+        }else if(props.action === 'ReservarVisitante'){
+            path = "/VisitorBookingPage"
+        }else if(props.action === 'ReservarJefatura'){
+            path = "/ChiefBookingPage"
+        }else if(props.action === 'ReservarVehiculoTec'){
+            path = "/TecDriverBookingPage"
         }else{
             path = "/BookingPage"
         }

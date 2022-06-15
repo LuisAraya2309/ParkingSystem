@@ -14,11 +14,14 @@ import { HomePage } from './UserHome/HomePage';
 import { UserInformation } from './UserInformation/UserInformation';
 import { ManageUsersPage } from './ManageUsers/ManageUsersPage';
 import { ClientPage } from './ClientPage/ClientPage';
+import { ChiefPage } from './ClientPage/ChiefPage';
+import { OperatorPage } from './ClientPage/OperatorPage';
 import { ModifySchedule } from './ClientSchedule/ModifySchedule';
 import { CustumerInquieries } from './CustumerInquieries/CustumerInquieries';
 import { LocationParking } from './LocationParking/LocationParking';
 import { ScheduleParking } from './ScheduleParking/ScheduleParking';
 import { ModifyPage } from './ManageUsers/ModifyPage';
+import { CreateUserPage } from './ManageUsers/CreateUserPage';
 import { CreateParking } from './ManageParking/CreateParking';
 import { ModifyParking } from './ManageParking/ModifyParking';
 import { ConsultParking } from './ManageParking/ConsultParking';
@@ -27,6 +30,9 @@ import { ManageParkingPage } from './ManageParking/ManageParkingPage';
 import { ReportsPage } from './ScheduleReports/ReportsPage';
 import { RegisteredParkings } from './RegisteredParkings/RegisteredParkings';
 import { BookingPage } from './ManageBooking/BookingPage';
+import { VisitorBookingPage } from './ManageBooking/VisitorBookingPage';
+import { ChiefBookingPage } from './ManageBooking/ChiefBookingPage';
+import { TecDriverBookingPage } from './ManageBooking/TecDriverBookingPage';
 
 export function App() {
   return (
@@ -52,6 +58,10 @@ export function App() {
                   
                   <Route exact path="/ClientPage" element={<ClientPage />}/>
 
+                  <Route exact path="/ChiefPage" element={<ChiefPage />}/>
+
+                  <Route exact path="/OperatorPage" element={<OperatorPage />}/>
+
                   <Route exact path="/ClientSchedule" element={<ModifySchedule />}/>
 
                   <Route exact path="/CustumerInquieries" element={<CustumerInquieries />}/>
@@ -61,6 +71,8 @@ export function App() {
                   <Route exact path="/ScheduleParking" element={<ScheduleParking />}/>
 
                   <Route exact path="/ModifyPage" element={<ModifyPage />}/>
+
+                  <Route exact path="/CreateUserPage" element={<CreateUserPage />}/>
 
                   <Route exact path="/CreateParking" element={<CreateParking />}/>
 
@@ -75,6 +87,12 @@ export function App() {
                   <Route exact path="/RegisteredParkings" element={<RegisteredParkings />}/>
 
                   <Route exact path="/BookingPage" element={<BookingPage />}/>
+
+                  <Route exact path="/VisitorBookingPage" element={<VisitorBookingPage />}/>
+
+                  <Route exact path="/ChiefBookingPage" element={<ChiefBookingPage />}/>
+
+                  <Route exact path="/TecDriverBookingPage" element={<TecDriverBookingPage />}/>
 
               </Routes>
                 

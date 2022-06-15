@@ -9,10 +9,17 @@ import axios from 'axios';
 export function SignUpForm() {
     const {register,handleSubmit} = useForm();
     const [departmentsList,setDepartmentsList] = useState([]);
+    var checkboxState = false
+
+    function changeBoxValue(e){
+        checkboxState = checkboxState === false ? true: false
+    }
 
 
     const onSubmit = async(data) =>{
         try{
+            data['type'] = "User";
+            data['discapacity'] = checkboxState;
             const response = await axios.post('http://localhost:3001/users/createUser', data);
             console.log(response)
         }catch(err){
@@ -44,19 +51,16 @@ export function SignUpForm() {
             </div>
             <br></br>
             <div className="row">
+                
                 <div className="col">
                     <input type="text" className="form-control" placeholder="Identidad" aria-label="Identidad" {...register('ID',{required:true})}/>
                 </div>
 
                 <div className="col">
-                    <select className="form-select" defaultValue={'DEFAULT'} aria-label="TipoUsuario" {...register('type',{required:true})} >
-                        <option value="DEFAULT" disabled>Tipo de usuario</option>
-                        <option key= "1" value="User" >Usuario TEC</option>
-                        <option key= "2" value="Chief" >Jefatura</option>
-                        <option key= "3" value="Preferential" >Usuario preferencial</option>
-                        <option key= "4" value="TecDriver" >Conductor oficial</option>
-                        <option key= "5" value="Visitor" >Visitante</option>
-                    </select>
+                    <div className="form-check form-switch">
+                        <input className="form-check-input" type="checkbox" id="prueba" onChange={(e) => changeBoxValue(e)} />
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Discapacidad</label>
+                    </div>
                 </div>
 
             </div>

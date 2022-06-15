@@ -6,14 +6,12 @@ import {useNavigate} from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import {notAvailableSlots, AvailableList} from './AuxiliarFunctions'
 
-export function BookingPage() {
+export function VisitorBookingPage() {
 
-    const typesDicc = {'User':'userSlot','Chief':'chiefSlot','Preferential':'preferentialSlot','TecDriver':'tecVehicleSlot', 'Visitor':'visitorSlot'}
     const {register,handleSubmit} = useForm();
     const {state} = useLocation();
     const parkingInfo = state.parkingInfo;
     const [userInfo,setUser] = useState([]);
-    const [vehicleList,setVehicleList] = useState([]);
     const [bookingList,setbookingList] = useState([]);
     const [slotsInfo,setSlots] = useState([]);
 
@@ -25,7 +23,7 @@ export function BookingPage() {
 
     let navigate = useNavigate();
     const moveTo = () =>{
-      let path = '/ClientPage';
+      let path = userType === 'Chief' ? '/ChiefPage': '/AdminPage';
       navigate(path, {state:{user:userInfo.email, userType:userType}});
     }
 
@@ -42,9 +40,9 @@ export function BookingPage() {
     const onSubmit = async(data) =>{
 
         try{
-            const userSlots = userInfo.discapacity === true ? slotsInfo['preferentialSlot'] : slotsInfo[typesDicc[userType]];
+            const userSlots = slotsInfo['visitorSlot'];
             const notAvailable = notAvailableSlots(bookingList,data.start_hour,data.finish_hour)
-            const slotsAvailableMapList = AvailableList(notAvailable, userSlots.totalAmount, userInfo.discapacity === true ? 'Preferential': userType)
+            const slotsAvailableMapList = AvailableList(notAvailable, userSlots.totalAmount, 'Visitor')
             agregar(slotsAvailableMapList);
             alert("Busqueda realizada con exito")
             
@@ -58,7 +56,20 @@ export function BookingPage() {
         try{
             const newSlot = document.getElementById('slotsSelect'); const slotId = newSlot.value;
             const schedule = data.start_hour + " - " + data.finish_hour;
-            const bookingObject = {'parkingName': data.parkingName, 'slotId': slotId ,'userId': userInfo.ID, 'vehicle': data.vehicle, 'schedule': schedule,'date': date , 'expired':false}
+            
+            const bookingObject = {
+                'parkingName': data.parkingName, 
+                'slotId': slotId ,
+                'userId': userInfo.ID , 
+                'vehicle': data.vehicle , 
+                'schedule': schedule ,
+                'date': date ,
+                'expired': false , 
+                'VehicleDriver': data.visitorName ,
+                'visitorId': data.visitorId ,
+                'visitorMatter': data.matter,
+                'visitLocation': data.visitLocation}
+            
             axios.post('http://localhost:3001/bookings/createBooking',bookingObject).then((response) => {})
             moveTo();
 
@@ -71,7 +82,6 @@ export function BookingPage() {
 
         axios.post('http://localhost:3001/users/getUserByEmail',{'email':email}).then((response) => {
             setUser(response.data)
-            setVehicleList(response.data.vehicles)
         })
 
         axios.post('http://localhost:3001/bookings/getBookingsByParking',{'parkingName':parkingInfo.name}).then((response) => {
@@ -103,20 +113,12 @@ export function BookingPage() {
                                     <form onSubmit={handleSubmit(onSubmit)} >
                                         <div className="row">
                                             <div className="col">
-                                                <label htmlFor="text" className="form-label">Nombre</label>
+                                                <label htmlFor="text" className="form-label">Encargado</label>
                                                 <input type="text" className="form-control" value=  {userInfo.name+" "+userInfo.lastname1+" "+userInfo.lastname2} readOnly/>
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Placa del vehículo</label>  
-                                                <select className="form-select" defaultValue={'DEFAULT'} aria-label="PlacaVehiculo" {...register('vehicle',{required:true})}>
-                                                <option value="DEFAULT" disabled>Placa del vehículo</option>
-                                                {vehicleList.map((vehicle) =>{
-                                                    return (
-                                                        <option key={vehicle} value={vehicle} > {vehicle}</option>
-                                                        
-                                                        );
-                                                })}
-                                                </select>                                                                                                               
+                                                <input type="text" className="form-control" {...register('vehicle',{required:true})}/>                                                                                                            
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Parqueo</label>
@@ -124,8 +126,30 @@ export function BookingPage() {
                                             </div>
                                         </div>                                     
                                         <br></br>
+
+                                        <div className="row">
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Nombre del visitante</label>
+                                                <input type="text" className="form-control" {...register('visitorName',{required:true})}/>
+                                            </div>
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Identificación del visitante</label>  
+                                                <input type="text" className="form-control" {...register('visitorId',{required:true})}/>                                                                                                            
+                                            </div>
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Motivo de la visita</label>  
+                                                <textarea type="text" style={{resize:'none'}} className="form-control" {...register('matter',{required:true})}/>                                                                                                            
+                                            </div>
+
+                                        </div>                                     
+                                        <br></br>
+
                                         <div className="row">
 
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Lugar a visitar</label>  
+                                                <textarea type="text" style={{resize:'none'}} className="form-control" {...register('visitLocation',{required:true})}/>                                                                                                            
+                                            </div>
                                         
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Hora inicio</label>

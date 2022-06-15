@@ -11,6 +11,7 @@ export function ModifyPage() {
     const userInfo = state.userInfo;
     const {register,handleSubmit} = useForm();
     const [departmentsList,setDepartmentsList] = useState([]);
+    var checkboxState = false;
 
     let navigate = useNavigate()
     const moveTo = () =>{
@@ -18,8 +19,13 @@ export function ModifyPage() {
         navigate(path)
     }
 
+    function changeBoxValue(e){
+        checkboxState = checkboxState === false ? true: false;
+    }
+
     const onSubmit = async(data) =>{
         try{
+            data['discapacity'] = checkboxState;
             axios.post('http://localhost:3001/users/updateUsers',data).then((response) => {})
             moveTo()
         }catch(err){
@@ -53,41 +59,45 @@ export function ModifyPage() {
                                         <div className="row">
 
                                             <div className="col">
-                                                <label htmlFor="text" className="form-label">Identificación</label>
-                                                <input type="text" className="form-control" value= {userInfo.ID} {...register('ID',{required:true})}/>
+                                                <label htmlFor="text" className="form-label">Usuario</label>
+                                                <input type="text" className="form-control" value= {userInfo.email} {...register('email',{required:true})}/>
                                             </div>
 
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Nombre</label>
-                                                <input type="text" className="form-control" placeholder={userInfo.name} {...register('name',{required:true})}/>
+                                                <input type="text" className="form-control" defaultValue={userInfo.name} {...register('name',{required:true})}/>
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Apellido 1</label>
-                                                <input type="text" className="form-control" placeholder={userInfo.lastname1} {...register('lastname1',{required:true})}/>
+                                                <input type="text" className="form-control" defaultValue={userInfo.lastname1} {...register('lastname1',{required:true})}/>
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Apellido 2</label>
-                                                <input type="text" className="form-control"  placeholder={userInfo.lastname2} {...register('lastname2',{required:true})}/>
+                                                <input type="text" className="form-control"  defaultValue={userInfo.lastname2} {...register('lastname2',{required:true})}/>
                                             </div>
-                                            <div className="col">
-                                                <label htmlFor="text" className="form-label">Contraseña</label>
-                                                <input type="text" className="form-control"  placeholder={userInfo.password} {...register('password',{required:true})}/>
-                                            </div>
+                                            
 
                                         </div>
                                         <br></br>
+                                        <div className="row">
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Contraseña</label>
+                                                <input type="text" className="form-control"  defaultValue={userInfo.password} {...register('password',{required:true})}/>
+                                            </div>
+
+                                            <div className="col">
+                                                <label htmlFor="text" className="form-label">Placas</label>
+                                                <input type="text" className="form-control"  defaultValue={userInfo.vehicles} {...register('vehicles',{required:true})}/>
+                                            </div>
+
+                                        </div>    
 
                                         <br></br>
                                         <div className="row">
 
                                             <div className="col">
-                                                <label htmlFor="text" className="form-label">Correo institucional</label>
-                                                <input type="email" className="form-control"  value={userInfo.email} {...register('email',{required:true})}/>
-                                            </div>
-
-                                            <div className="col">
                                                 <label htmlFor="text" className="form-label">Correo alterno</label>
-                                                <input type="email" className="form-control"  placeholder={userInfo.altEmail} {...register('altEmail',{required:true})}/>
+                                                <input type="email" className="form-control"  defaultValue={userInfo.altEmail} {...register('altEmail',{required:true})}/>
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Departamentos</label>
@@ -104,15 +114,18 @@ export function ModifyPage() {
                                             </div>
                                             <div className="col">
                                                 <label htmlFor="text" className="form-label">Teléfono</label>
-                                                <input type="text" className="form-control" placeholder={userInfo.phone} {...register('phone',{required:true})}/>
-                                            </div>
-                                            <div className="col">
-                                                <label htmlFor="text" className="form-label">Placas</label>
-                                                <input type="text" className="form-control"  placeholder={userInfo.vehicles} {...register('vehicles',{required:true})}/>
-                                            </div>
+                                                <input type="text" className="form-control" defaultValue={userInfo.phone} {...register('phone',{required:true})}/>
+                                            </div>                                           
                                             
                                         </div>
+
                                         <br></br>
+                                        <div className="col">
+                                            <div className="form-check form-switch">
+                                                <input className="form-check-input" type="checkbox" id="prueba" onChange={(e) => changeBoxValue(e)} />
+                                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Discapacidad</label>
+                                            </div>
+                                        </div>
                                         <center>
                                             <button type="submit" className="btn btn-dark text-center">Modificar información</button>    
                                         </center>

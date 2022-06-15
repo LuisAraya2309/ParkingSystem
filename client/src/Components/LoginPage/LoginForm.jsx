@@ -7,25 +7,32 @@ export  function LoginForm() {
     const {register,handleSubmit} = useForm();
     
     let navigate = useNavigate()
-    const loggedIn = (userLogged,userType) =>{
+    const loggedIn = (userLogged,userType, parkingName) =>{
         let adminPath
-        (userType==='Admin') ? (adminPath='/AdminPage') : (adminPath='/ClientPage') 
-        navigate(adminPath,{state:{user:userLogged, userType: userType}})
+        if(userType==='Admin'){
+            adminPath='/AdminPage'
+        }else if(userType==='User'){
+            adminPath='/ClientPage'
+        }else if(userType==='Chief'){
+            adminPath='/ChiefPage'
+        }else if(userType==='TecDriver'){
+            adminPath='/OperatorPage'
+        }
+        navigate(adminPath,{state:{user:userLogged, userType: userType, parkingName: parkingName}})
     }
 
 
     const onSubmit = async(data) =>{
         try{
             const response = await axios.post('http://localhost:3001/users/login', data);
-            const userLogged = response.data.email
-            const userType = response.data.type
-            loggedIn(userLogged,userType)
-            
+            const userLogged = response.data.email;
+            const userType = response.data.type;
+            const parkingName = response.data.parkingName;
+            loggedIn(userLogged,userType, parkingName)
         } catch(err){
             alert('Usuario invalido')
         }
         
-    
     }
 
   return (

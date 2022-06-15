@@ -4,22 +4,22 @@ const BookingSchema = new mongoose.Schema({
     
     parkingName:{
         type:String,
-        required:false,
+        required:true,
     },
 
     slotId:{
         type:String,
-        required:false,
+        required:true,
     },
 
     userId:{
         type:Number,
-        required:false,
+        required:true,
     },
 
     vehicle:{
         type:String,
-        required:false,
+        required:true,
     },
 
     schedule:{
@@ -27,14 +27,44 @@ const BookingSchema = new mongoose.Schema({
         required:false,
     },
 
-    duration:{
+    date:{
+        type:String,
+        required:true,
+    },
+
+    visitorId:{
         type:Number,
+        required:false,
+    },
+
+    visitorMatter:{
+        type:String,
+        required:false,
+    },
+
+    visitLocation:{
+        type:String,
+        required:false,
+    },
+
+    vehicleModel:{
+        type:String,
+        required:false,
+    },
+
+    vehicleColor:{
+        type:String,
+        required:false,
+    },
+
+    vehicleDriver:{
+        type:String,
         required:false,
     },
 
     expired:{
         type:Boolean,
-        required:false,
+        required:true,
     }
 
 });

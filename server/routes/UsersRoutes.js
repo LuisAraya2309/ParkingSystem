@@ -73,9 +73,9 @@ router.post("/login", async (req,res) => {
     const user = {
         "email":req.body.email,
         "password":req.body.password,
-        "type":""
+        "type":"",
+        "parkingName":""
     }
-    
     UserModel.aggregate([{$match:{email:{$eq:user.email}}},{$match:{password:{$eq:user.password}}}], (err,result) =>{
         if (err){
             res.status(404).send('User invalid')
@@ -85,6 +85,7 @@ router.post("/login", async (req,res) => {
         }
         else{
             user.type = result[0].type
+            user.parkingName = result[0].parkingName
             res.json(user)
         }
     })
@@ -92,10 +93,12 @@ router.post("/login", async (req,res) => {
 
 
 router.post("/updateByID", async (req,res) => {
-
-    const setAttributes = {name: req.body.name, lastname1: req.body.lastname1, lastname2: req.body.lastname2, password: req.body.password,
+    console.log('entre');
+    console.log(req.body);
+    const setAttributes = {discapacity: req.body.discapacity, name: req.body.name, lastname1: req.body.lastname1, lastname2: req.body.lastname2, password: req.body.password,
         altEmail: req.body.altEmail, department:req.body.department, phone:req.body.phone, vehicles:[req.body.vehicles]};
 
+    console.log(setAttributes);
     UserModel.aggregate([{$match:{ID:{$eq:req.body.ID}}}], (err,result) =>{
         if (err){
             res.status(404).send('User invalid')
@@ -114,7 +117,7 @@ router.post("/updateByID", async (req,res) => {
 
 router.post("/updateUsers", async (req,res) => {
 
-    const setAttributes = {name: req.body.name, lastname1: req.body.lastname1, lastname2: req.body.lastname2, password: req.body.password,
+    const setAttributes = {discapacity: req.body.discapacity, name: req.body.name, lastname1: req.body.lastname1, lastname2: req.body.lastname2, password: req.body.password,
         altEmail: req.body.altEmail, department:req.body.department, phone:req.body.phone, vehicles:[req.body.vehicles]};
 
     UserModel.updateOne({email:req.body.email},{$set:setAttributes},(err,result) =>{

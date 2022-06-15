@@ -5,7 +5,6 @@ import { PrincipalCard } from '../GeneralResources/PrincipalCard'
 
 export function ManageUsersPage() {
 
-
   return (
     <Fragment>
         <header className="App-header">
@@ -16,7 +15,7 @@ export function ManageUsersPage() {
                     <br/>
                     <div className="row row-cols-1 row-cols-md-3 g-4">
                         
-                        <PrincipalCard props={{title:"Registrar un usuario",buttonTitle:"Registrar un usuario",redirectLink:"/SignUpPage"}} />
+                        <PrincipalCard props={{title:"Registrar un usuario",buttonTitle:"Registrar un usuario",redirectLink:"/CreateUserPage"}} />
 
                         <ManageUsersForm props={{title:"Eliminar un usuario del sistema",buttonTitle:"Eliminar usuario", action:2}} />
                     

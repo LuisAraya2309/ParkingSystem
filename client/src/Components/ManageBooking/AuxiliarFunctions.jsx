@@ -66,6 +66,19 @@ export function notAvailableSlots(bookingList, start_hour, finish_hour){
 
 }
 
+export function notAvailableChiefList(bookingList){
+
+    let notAvailable = [];
+    // eslint-disable-next-line
+    bookingList.map((booking) =>{
+
+        notAvailable.push(booking.slotId);
+        
+    })
+    return notAvailable
+
+}
+
 export function AvailableList(notAvailable, totalSlots, userType){
 
     const typesDicc = {'User':'U','Chief':'C','Preferential':'P','TecDriver':'T', 'Visitor':'V'}

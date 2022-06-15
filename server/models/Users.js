@@ -18,6 +18,11 @@ const UserSchema = new mongoose.Schema({
         required:false,
     },
 
+    discapacity:{
+        type:Boolean,
+        required:false,
+    },
+
     email:{
         type:String,
         required:false,
@@ -59,6 +64,10 @@ const UserSchema = new mongoose.Schema({
     },
     schedule:{
         type:Object,
+        required : false
+    },
+    parkingName:{
+        type:String,
         required : false
     }
 });
