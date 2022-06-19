@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { PrincipalCard } from '../GeneralResources/PrincipalCard'
 import { BookingList } from '../GeneralResources/BookingList'
 import { useLocation } from 'react-router-dom';
+import { OperatorConsult } from '../QueriesModule/OperatorConsult'
 
 export function OperatorPage() {
 
@@ -18,14 +19,16 @@ export function OperatorPage() {
                     <div className='container mx-auto'>
                         <h1 className='text-center'>¡Bienvenido!</h1>
                         <br/>
-                        <div className="row row-cols-1 row-cols-md-3 g-3">
+                        <div className="row row-cols-1 row-cols-md-2 g-2">
     
                           <PrincipalCard props={{title:"Reportar vehículo oficial",buttonTitle:"Reportar reserva", redirectLink:"/TecDriverBookingPage", params:{userLogged:userLogged, userType:userType, parkingName: parkingName}}} />
 
                           <BookingList props={{title:"Liberar espacio de visitante",buttonTitle:"Liberar", action:"LiberarVisitantes", userLogged:userLogged, userType:userType, parkingName: parkingName}} />
 
                           <BookingList props={{title:"Liberar espacio de vehículo oficial",buttonTitle:"Liberar", action:"LiberarVehiculoOficial", userLogged:userLogged, userType:userType, parkingName: parkingName}} />
-                           
+
+                          <OperatorConsult props={{title:"Consultar infomacion de parqueo a cargo",buttonTitle:"Realizar consulta", parkingName: parkingName}} />
+                          
                         </div>
                                                 
                     </div>

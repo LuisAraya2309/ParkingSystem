@@ -109,6 +109,5 @@ router.post("/getParkingBySchedule", async (req,res) => {
 
 
 
-
 //missing final schedule model
 module.exports = router;

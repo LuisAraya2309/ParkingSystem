@@ -37,6 +37,10 @@ import { ByDepartmentsMetrics } from './QueriesModule/ByDepartmentsMetrics';
 import { VisitorBookingPage } from './ManageBooking/VisitorBookingPage';
 import { ChiefBookingPage } from './ManageBooking/ChiefBookingPage';
 import { TecDriverBookingPage } from './ManageBooking/TecDriverBookingPage';
+import { OperatorConsultForm } from './QueriesModule/OperatorConsultForm';
+import { OperatorConsult } from './QueriesModule/OperatorConsult';
+import { ConsultBookingByUserDate } from './QueriesModule/ConsultBookingByUserDate';
+
 
 export function App() {
   return (
@@ -105,6 +109,12 @@ export function App() {
                   <Route exact path="/ChiefBookingPage" element={<ChiefBookingPage />}/>
 
                   <Route exact path="/TecDriverBookingPage" element={<TecDriverBookingPage />}/>
+
+                  <Route exact path="/OperatorConsultForm" element={<OperatorConsultForm />}/>
+
+                  <Route exact path="/OperatorConsult" element={<OperatorConsult />}/>
+
+                  <Route exact path="/ConsultBookingByUserDate" element={<ConsultBookingByUserDate />}/>
 
               </Routes>
                 

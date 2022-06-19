@@ -121,6 +121,23 @@ router.post("/parkingsByDeparment" , async (req,res) => {
 })  
 
 
+router.post("/getBookingsByUserDate" , async (req,res) => {
+    BookingModel.aggregate([{$match:{userId:{$eq:req.body.userId}}},{$sort:{date:1,schedule:1}}], (err,result) =>{
+        if (err){
+            res.status(404).send('Parking invalid')
+        }
+        if(result[0] === undefined){
+            res.status(404).send('Parking invalid')
+        }
+        else{
+            
+            res.json(result)
+        }
+    })
+})
+
+
+
 module.exports = router;
 
 

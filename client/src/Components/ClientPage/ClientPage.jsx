@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { PrincipalCard } from '../GeneralResources/PrincipalCard'
 import { MangParkingForm } from '../ManageParking/MangParkingForm'
+import { ConsultBookingByUserDate } from '../QueriesModule/ConsultBookingByUserDate'
 import { useLocation } from 'react-router-dom';
 
 export function ClientPage() {
@@ -23,7 +24,9 @@ export function ClientPage() {
                             <MangParkingForm props={{title:"Reservar Parqueo",buttonTitle:"Realizar reserva", action:"BookingPage", userLogged:userLogged, userType:userType}} />
     
                             <PrincipalCard props={{title:"Modificar Horario",buttonTitle:"Modificar",redirectLink:"/ClientSchedule",params:userLogged}} />
-                           
+                            
+                            <PrincipalCard props={{title:"Consultar reservaciones",buttonTitle:"Consultar",redirectLink:"/ConsultBookingByUserDate",params:userLogged}} />                           
+
                         </div>
                                                 
                     </div>
