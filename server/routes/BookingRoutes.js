@@ -5,7 +5,11 @@ const BookingModel = require('../models/Bookings')
 const UserModel = require('../models/Users')
 
 router.post("/createBooking", async (req,res) => {
-    const newSlots = createStrategyBook(req.body);
+    const booking = req.body;
+    if(!booking.schedule){
+        booking.schedule = '';
+    }
+    const newSlots = createStrategyBook(booking);
     newSlots.save()
 })
 
