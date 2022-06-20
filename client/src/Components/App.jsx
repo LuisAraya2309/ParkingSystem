@@ -40,6 +40,7 @@ import { TecDriverBookingPage } from './ManageBooking/TecDriverBookingPage';
 import { OperatorConsultForm } from './QueriesModule/OperatorConsultForm';
 import { OperatorConsult } from './QueriesModule/OperatorConsult';
 import { ConsultBookingByUserDate } from './QueriesModule/ConsultBookingByUserDate';
+import { ExpirationSimulator } from './ExpireSimulation/ExpirationSimulator';
 
 
 export function App() {
@@ -115,6 +116,7 @@ export function App() {
                   <Route exact path="/OperatorConsult" element={<OperatorConsult />}/>
 
                   <Route exact path="/ConsultBookingByUserDate" element={<ConsultBookingByUserDate />}/>
+                  <Route exact path="/Simulate" element={<ExpirationSimulator />}/>
 
               </Routes>
                 

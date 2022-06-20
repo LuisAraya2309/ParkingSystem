@@ -26,6 +26,7 @@ export function AdminPage() {
                         <PrincipalCard props={{title:"Módulo de Consultas",buttonTitle:"Realizar Consultas",redirectLink:"/QueriesPage"}} />
 
                         <MangParkingForm props={{title:"Reservar Parqueo a visitante",buttonTitle:"Realizar reserva", action:"ReservarVisitante", userLogged:userLogged, userType:userType}} />
+                        <PrincipalCard props={{title:"Simulador de Expiracion",buttonTitle:"Iniciar Simulacion",redirectLink:"/Simulate"}} />
 
 
                     </div>
