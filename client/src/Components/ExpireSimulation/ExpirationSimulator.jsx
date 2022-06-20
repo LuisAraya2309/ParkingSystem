@@ -1,4 +1,6 @@
 import React, { Fragment} from 'react'
+import { useState } from 'react';
+import axios from 'axios'
 import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars'
 
 export function ExpirationSimulator({props}) {
@@ -6,6 +8,13 @@ export function ExpirationSimulator({props}) {
     let date = new Date();
     const handleDateChange = (datetime) => {
         date = datetime.value
+    }
+    const [ExpiredList, setExpiredList] = useState([]);
+    const simulate = () => {
+        axios.post("http://localhost:3001/bookings/simulation")
+        .then((expiredBookings) => {
+            setExpiredList(expiredBookings)
+        })
     }
     return (
         <Fragment>
@@ -27,7 +36,27 @@ export function ExpirationSimulator({props}) {
                                     min={minDate}
                                     onChange={handleDateChange}
                                 />
-                                <b className="btn btn-danger m-5">Simular</b>
+                                <b onClick={simulate} className="btn btn-danger m-5">Simular</b>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Parqueo</th>
+                                            <th>SlotID</th>
+                                            <th>Fecha</th>
+                                            <th>Expirado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {ExpiredList.map((book)=> 
+                                        <tr>
+                                            <td>{book.parkingName}</td>
+                                            <td>{book.slotId}</td>
+                                            <td>{book.date}</td>
+                                            <td>{book.expired}</td>
+                                        </tr>
+                                        )}
+                                    </tbody>
+                                </table>
                             </div>
                                                             
                         </div>
