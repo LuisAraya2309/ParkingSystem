@@ -1,9 +1,11 @@
 const router = require('express').Router();
+
+const createStrategyBook = require('../helper/BookingManager');
 const BookingModel = require('../models/Bookings')
 const UserModel = require('../models/Users')
 
 router.post("/createBooking", async (req,res) => {
-    const newSlots = BookingModel(req.body)
+    const newSlots = createStrategyBook(req.body);
     newSlots.save()
 })
 
