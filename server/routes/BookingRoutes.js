@@ -93,6 +93,20 @@ const getDepartment = async (userId) =>{
 
 }
 
+router.post("/simulation" , async (req,res) => {
+    const bookings = await BookingModel.find({})
+    const now = new Date()
+    const expiredBookings = []
+    for(const book of bookings){
+        if(new Date(book.date).getTime() <= now.getTime()){
+            book.expired = true
+            expiredBookings.push(book)
+            book.save()
+        }
+    }
+    res.status(200).json(expiredBookings)
+})
+
 router.post("/parkingsByDeparment" , async (req,res) => {
     const departmentSplitted = req.body.departmentName.split(' ')
     const departmentFilter = departmentSplitted[0][0] + departmentSplitted[2][0] + departmentSplitted[4][0]
