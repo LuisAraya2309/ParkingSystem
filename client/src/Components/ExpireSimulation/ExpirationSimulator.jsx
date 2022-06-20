@@ -13,7 +13,8 @@ export function ExpirationSimulator({props}) {
     const simulate = () => {
         axios.post("http://localhost:3001/bookings/simulation")
         .then((expiredBookings) => {
-            setExpiredList(expiredBookings)
+            console.log(expiredBookings);
+            setExpiredList(expiredBookings.data)
         })
     }
     return (
@@ -37,7 +38,7 @@ export function ExpirationSimulator({props}) {
                                     onChange={handleDateChange}
                                 />
                                 <b onClick={simulate} className="btn btn-danger m-5">Simular</b>
-                                <table class="table">
+                                <table className="table">
                                     <thead>
                                         <tr>
                                             <th>Parqueo</th>
